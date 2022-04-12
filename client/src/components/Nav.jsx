@@ -7,23 +7,25 @@ function Nav({onSearch}) {
     return (
         <nav className='navbar'>
           <li className='a'>
-            <Link to='/'>
+            <Link className='b' to='/'>
               Home of Henry Foods
             </Link>
           </li>
           <li className='a'>
-            <Link to='/about'>
+            <Link className='b' to='/about'>
               About
             </Link>
           </li>
           <li className='a'>
-            <Link to='/meal'>
+            <Link className='b' to='/meal'>
               Meal
             </Link>
           </li>
-          <SearchBar
-            onSearch={onSearch}
-          />
+          <li>
+            <SearchBar
+              onSearch={onSearch}
+            />
+          </li>
         </nav>
     );
   };
