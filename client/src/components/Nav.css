@@ -1,8 +1,9 @@
 .navbar {
     width: 100%;
     position: fixed;
-    justify-content: space-between;
+    justify-content: space-around;
     z-index: 1;
     top: 0;
-    background-color: red;
+    color: antiquewhite;
+    background-color: antiquewhite;
   }

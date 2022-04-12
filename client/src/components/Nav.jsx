@@ -8,8 +8,11 @@ function Nav() {
           <Link to='/'>
             Home of Henry Foods
           </Link>
-          <Link to='/otro'>
-            <span>Otro</span>
+          <Link to='/about'>
+            About
+          </Link>
+          <Link to='/meal'>
+            Meal
           </Link>
         </nav>
     );

@@ -1,10 +1,9 @@
 import React from 'react';
 
-function About() {
+function About({meal}) {
   return (
     <div>
-      <h2>Nimbus</h2>
-      <p>First project made while </p>
+      <h2>The meal you look for: {meal}</h2>
     </div>
   );
 };
