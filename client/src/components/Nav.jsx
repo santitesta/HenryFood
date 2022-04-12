@@ -6,15 +6,21 @@ import SearchBar from './SearchBar.jsx';
 function Nav({onSearch}) {
     return (
         <nav className='navbar'>
-          <Link to='/'>
-            Home of Henry Foods
-          </Link>
-          <Link to='/about'>
-            About
-          </Link>
-          <Link to='/meal'>
-            Meal
-          </Link>
+          <li className='a'>
+            <Link to='/'>
+              Home of Henry Foods
+            </Link>
+          </li>
+          <li className='a'>
+            <Link to='/about'>
+              About
+            </Link>
+          </li>
+          <li className='a'>
+            <Link to='/meal'>
+              Meal
+            </Link>
+          </li>
           <SearchBar
             onSearch={onSearch}
           />

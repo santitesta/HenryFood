@@ -1,5 +1,6 @@
 .navbar {
     width: 100%;
+    display:flex;
     position: fixed;
     justify-content: space-around;
     z-index: 1;
@@ -7,3 +8,7 @@
     color: antiquewhite;
     background-color: antiquewhite;
   }
+
+.a {
+  width: 33%;
+}

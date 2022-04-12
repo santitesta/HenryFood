@@ -9,7 +9,7 @@ import Meal from './components/Meal.jsx'
 
 function App() {
   //Busqueda en la API
-  const [meal, setMeal] = useState();
+  const [meal, setMeal] = useState({name: 'Facu'});
   // fetch(`https://api.spoonacular.com/recipes/complexSearch?query=pasta&apiKey=0c696dad87b44ab4992aff6e4ab24c8d`)
   //   .then(r => r.json())
   //   .then((res) => {
