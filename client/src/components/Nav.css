@@ -1,0 +1,8 @@
+.navbar {
+    width: 100%;
+    position: fixed;
+    justify-content: space-between;
+    z-index: 1;
+    top: 0;
+    background-color: red;
+  }
