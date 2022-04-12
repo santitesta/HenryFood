@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Nav.css'
+import SearchBar from './SearchBar.jsx';
 
-function Nav() {
+function Nav({onSearch}) {
     return (
         <nav className='navbar'>
           <Link to='/'>
@@ -14,6 +15,9 @@ function Nav() {
           <Link to='/meal'>
             Meal
           </Link>
+          <SearchBar
+            onSearch={onSearch}
+          />
         </nav>
     );
   };
