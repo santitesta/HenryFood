@@ -2,8 +2,11 @@ import React from 'react';
 import './MealDisplay.css'
 
 function MealDisplay({meals}) {
+  if (!meals) {
+    return <p></p>
+  }
   return (
-    <div>
+    <div className='eldiv'>
       <ol>
         <li>{meals.name}</li>
         <li><img src={meals.img} alt="img not found" /></li>
