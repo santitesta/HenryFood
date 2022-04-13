@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './SearchBar.css'
 
 export default function SearchBar({onSearch}) {
   const [meal, setMeal] = useState("");
@@ -9,12 +10,13 @@ export default function SearchBar({onSearch}) {
       document.getElementById("myForm")[0].value = '';
     }}>
       <input
+        className="inputSearch"
         type="text"
-        placeholder="Meal..."
+        placeholder="Type your wished plate..."
         value={meal}
         onChange={e => setMeal(e.target.value)}
       />
-      <input type="submit" value="Agregar"/>
+      <input type="submit" value="Search"/>
     </form>
   );
 }

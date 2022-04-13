@@ -1,16 +1,16 @@
 import './App.css';
 import React, { useState } from 'react';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 
 import Home from './components/Home.jsx'
 import Nav from './components/Nav.jsx'
 import About from './components/About.jsx'
-import Meal from './components/Meal.jsx'
+import Details from './components/Details.jsx';
 import MealDisplay from './components/MealDisplay.jsx';
 
 function App() {
   //Busqueda en la API
-  const [meal, setMeal] = useState();
+  const [meal, setMeal] = useState([]);
   // function onSearch(citySearch) {
   //   fetch(`http://api.openweathermap.org/data/2.5/weather?q=${citySearch}&appid=4ae2636d8dfbdc3044bede63951a019b&units=metric`)
   function onSearch(mealSearch) {
@@ -22,7 +22,7 @@ function App() {
             name: r.results[0].title,
             img: r.results[0].image
           }
-          setMeal(aux);
+          setMeal(oldMeals => [...oldMeals, aux] );
           document.getElementById("myForm").reset();
         } else {
           alert("That ain't a real meal!")
@@ -31,13 +31,13 @@ function App() {
   }
   return (
     <div className="App">
-      <Nav onSearch={onSearch}/>
+      <Nav/>
       <Routes>
         <Route path="/" element={<Home />}/>
         <Route path="/About" element={<About />}/>
-        <Route path='/Meal' element={<Meal meal={meal}/>}/>
+        <Route path='/MealDisplay' element={<MealDisplay meal={meal} onSearch={onSearch}/>}/>
+        <Route path='/Details' element={<Details meal={meal}/>}/>
       </Routes>
-      <MealDisplay meals={meal}/>
     </div>
   );
 }
