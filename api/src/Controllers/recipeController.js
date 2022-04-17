@@ -4,8 +4,6 @@ const URL = "https://rickandmortyapi.com/api"
 async function getRecipe(req,res){
   try {
     // let recipe = (await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=pasta&apiKey=${apiKey}&addRecipeInformation=true`)).data
-   
-    
     let recipe = (await axios.get(`${URL}/character`)).data.results
     .map(e => {
       return {
