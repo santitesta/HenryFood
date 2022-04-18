@@ -10,7 +10,7 @@ function MealDisplay({meal, onSearch}) {
   return (
     <div>
       <SearchBar onSearch={onSearch}/>
-        {meal.map(m => <div className='eldiv')}
+        {meal.map(m => <div className='eldiv'/>)}
         <p>{meal.name}</p>
         <p><img src={meal.img} alt="img not found" /></p>
         <Link className='d' to='/details'>Details!</Link>
