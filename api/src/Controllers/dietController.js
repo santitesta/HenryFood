@@ -7,7 +7,7 @@ async function getDiets(req,res,next){
     let diets = (await axios.get(`${URL}/episode`)).data.results
       .map(e => {
         return {
-          // id: e.id,
+          id: e.id,
           name: e.name
         }
       })
@@ -20,7 +20,8 @@ async function getDiets(req,res,next){
 async function chargeDiets(req,res){
   let diets = await getDiets()
   return Diets.bulkCreate(diets)
-    .then(response => res.send(response))
+    // .then(response => res.send(response))
+    .then(response => console.log('Diets loaded'))
     .catch(error => console.log(error))
 }
 

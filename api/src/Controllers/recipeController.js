@@ -1,10 +1,11 @@
 const axios = require("axios")
 const URL = "https://rickandmortyapi.com/api"
+const {Recipes, Diets} = require("../db")
 
 async function getRecipe(req,res){
   try {
     // let recipe = (await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=pasta&apiKey=${apiKey}&addRecipeInformation=true`)).data
-    let recipe = (await axios.get(`${URL}/character`)).data.results
+    let recipes = (await axios.get(`${URL}/character`)).data.results
     .map(e => {
       return {
         id: e.id,
@@ -14,7 +15,11 @@ async function getRecipe(req,res){
         image: e.image
       }
     })
-    res.send(recipe)
+
+    let allRecipes = (await Recipes.findAll()).concat(recipes)
+    // console.log("Database Recipes: ", dbRecipes[0]?.dataValues)
+
+    res.send(allRecipes)
     // fetch('https://rickandmortyapi.com/api/character') // why doesnt it work???
     //   .then(r => r.json())
     //   .then(data => {
@@ -41,7 +46,20 @@ function getRecipeById(req,res){
     .catch(error => console.log(error))
 }
 
+async function createRecipe(req,res,next){
+  const {name, status, species, img, diet} = req.body
+  let recipe = {name, status, species, img}
+  Recipes.create(recipe)
+    .then(resp => {
+      resp.addDiets(diet)
+      res.send("Recetas cargadas padre")
+    })
+    .then(recipe => console.log(recipe))
+    .catch(error => console.log(error))
+}
+
 module.exports = {
   getRecipe,
-  getRecipeById
+  getRecipeById,
+  createRecipe
 }
