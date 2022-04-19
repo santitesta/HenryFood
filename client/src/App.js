@@ -18,11 +18,12 @@ function App() {
       .then(r => r.json())
       .then(r => {
         if(r.totalResults > 0) {
-          let aux = {
-            name: r.results[0].title,
-            img: r.results[0].image
-          }
-          setMeal(oldMeals => [...oldMeals, aux] );
+          // let aux = {
+          //   name: r.results[0].title,
+          //   img: r.results[0].image
+          // }
+          let aux = r.results
+          setMeal(aux);
           document.getElementById("myForm").reset();
         } else {
           alert("That ain't a real meal!")
