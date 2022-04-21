@@ -37,6 +37,12 @@ apiDiets = [{
   name: 'Whole30'
 }]
 
+async function getDiets(req,res){
+  let diets = await Diets.findAll()
+  console.log(diets)
+  res.send(diets)
+}
+
 async function createDiet(req,res,next){
   try {
     const {name} = req.body
@@ -48,11 +54,6 @@ async function createDiet(req,res,next){
   }
 }
 
-async function getDiets(req,res,next){
-  let diets = Diets.findAll()
-  res.send(diets)
-}
-
 async function chargeDiets(req,res){
   return Diets.bulkCreate(apiDiets)
   .then(response => console.log('API Diets loaded'))
@@ -60,7 +61,7 @@ async function chargeDiets(req,res){
 }
 
 module.exports = {
-  createDiet,
   getDiets,
+  createDiet,
   chargeDiets
 }
