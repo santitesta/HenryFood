@@ -3,7 +3,8 @@ import React from 'react';
 import { Routes, Route } from "react-router-dom";
 
 import Home from './components/Home.jsx'
-// import Nav from './components/Nav.jsx'
+import Create from './components/Create';
+import Nav from './components/Nav.jsx'
 // import About from './components/About.jsx'
 // import Details from './components/Details.jsx';
 // import MealDisplay from './components/MealDisplay.jsx';
@@ -32,9 +33,10 @@ function App() {
   // }
   return (
     <div className="App">
-      {/* <Nav/> */}
+      <Nav/>
       <Routes>
         <Route path="/" element={<Home />}/>
+        <Route path="/create" element={<Create />}/>
         {/* <Route path="/About" element={<About />}/>
         <Route path='/MealDisplay' element={<MealDisplay meal={meal} onSearch={onSearch}/>}/>
         <Route path='/Details' element={<Details meal={meal}/>}/> */}

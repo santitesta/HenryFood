@@ -1,24 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Nav.css'
 
 function Nav() {
     return (
         <nav className='navbar'>
           <li className='a'>
-            <Link className='b' to='/'>
+            <NavLink className='b' to='/'>
               Home of Henry Foods
-            </Link>
+            </NavLink>
           </li>
           <li className='a'>
-            <Link className='b' to='/about'>
-              About
-            </Link>
+            <NavLink className='b' to='/create'>
+              Create your recipe!
+            </NavLink>
           </li>
           <li className='a'>
-            <Link className='b' to='/mealdisplay'>
+            <NavLink className='b' to='/mealdisplay'>
               Meal searching
-            </Link>
+            </NavLink>
           </li>
         </nav>
     );
