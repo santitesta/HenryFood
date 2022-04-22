@@ -17,4 +17,12 @@ export const getAllDiets = () => {
             .then(resp => dispatch({type: GET_DIETS, payload: resp.data}))
             .catch(error => console.log(error))
     }
-} 
+}
+
+export const createRecipe = (recipe) => {
+    return function(dispatch){
+        return axios.post("http://localhost:3001/recipe", recipe)
+            .then(resp => console.log('Recipe created successfully!'))
+            .catch(error => console.log(error))
+    }
+}
