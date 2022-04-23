@@ -1,30 +1,36 @@
 const axios = require("axios")
+const { Recipes, Diets } = require("../db")
+
+// require('dotenv').config();
+// const { apiKey } = process.env;
+
 const URL = "https://rickandmortyapi.com/api"
-const {Recipes, Diets} = require("../db")
+// const URLcs = "https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&${apiKey}"
+
+const fs = require('fs')
+let jsonData = JSON.parse(fs.readFileSync('spoonacular.json', 'utf-8'))
+
 
 async function getRecipe(req,res){
   try {
-    // let recipe = (await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=pasta&apiKey=${apiKey}&addRecipeInformation=true`)).data
-    let recipes = (await axios.get(`${URL}/character`)).data.results
-    .map(e => {
-      return {
-        id: e.id,
-        name: e.name,
-        status: e.status,
-        species: e.species,
-        image: e.image
-      }
-    })
+    // let recipes = (await axios.get(`${URLcs}&query=pasta`)).data.results
+
+    // let recipes = (await axios.get(`${URL}/character`)).data.results
+    // .map(e => {
+    //   return {
+    //     id: e.id,
+    //     name: e.name,
+    //     status: e.status,
+    //     species: e.species,
+    //     image: e.image
+    //   }
+    // })
+
+    let recipes = jsonData.results
 
     let allRecipes = (await Recipes.findAll()).concat(recipes)
-    // console.log("Database Recipes: ", dbRecipes[0]?.dataValues)
 
     res.send(allRecipes)
-    // fetch('https://rickandmortyapi.com/api/character') // why doesnt it work???
-    //   .then(r => r.json())
-    //   .then(data => {
-    //     res.send(data.results)
-    //   })
   } catch (error) {
     console.log(error)
   }
