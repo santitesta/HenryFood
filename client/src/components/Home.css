@@ -1,0 +1,49 @@
+.home {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bro {
+  column-count: 2;
+  width: 1000px;
+  margin-left: 400px;
+}
+
+.bro2 {
+  column-count: 1;
+  width: 1000px;
+  margin-left: 400px;
+}
+
+.filters {
+  position: fixed;
+  margin-left: 70px;
+}
+
+.meal {
+  height: 250px;
+}
+
+.title {
+  margin: 0 auto;
+  padding: 0px 15px;
+  width: 200px;
+  background-color: gold;
+  /* display: inline; */
+  text-decoration: none;
+  color: black;
+}
+
+.imgbro {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.cropped1 {
+  width: 200px; /* width of container */
+  height: 200px; /* height of container */
+  object-fit: cover;
+  border: 5px solid black;
+}

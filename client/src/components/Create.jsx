@@ -32,7 +32,7 @@ function Create() {
   }
 
   function handleDiets(e) {
-    console.log('entro a handle diets: ',e.target.value )
+    console.log('entro a handle diets: e.target: ',e.target,'e.target.value: ',e.target.value )
     if(e.target.value == 0) return;
     if (!dietrec.includes(e.target.value)) {
       setDietrec([...dietrec, e.target.value])
