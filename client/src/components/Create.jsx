@@ -18,29 +18,36 @@ function Create() {
     img: "",
   })
 
-  const [dietRec, setDietRec] = useState([])
+  const [dietrec, setDietrec] = useState([])
 
   function handleSubmit(e) {
     e.preventDefault()
     // if(errors.name || errors.status) return alert('Wrong data!')
-    let newRec = {...recipe, diet: dietRec}
+    let newRec = {...recipe, diet: dietrec.map(d => parseInt(d))}
     dispatch(createRecipe(newRec))
   }
 
   function handleChange(event) {
-    setRecipe({...recipe, [event.target.name]:[event.target.value]})
+    setRecipe({...recipe, [event.target.name]:event.target.value})
   }
 
   function handleDiets(e) {
+    console.log('entro a handle diets: ',e.target.value )
     if(e.target.value == 0) return;
-    if (!dietRec.includes(e.target.value)) {
-      setDietRec([...dietRec, e.target.value])
+    if (!dietrec.includes(e.target.value)) {
+      setDietrec([...dietrec, e.target.value])
     } else return alert('This diet was already included')
   }
 
   function handleDelete(e) {
-    setDietRec(dietRec.filter(d => d !== e.target.value))
+    e.preventDefault()
+    console.log('entro al delete, target value: ',e.target.value)
+    console.log('dietrec: ',dietrec)
+    //There's a problem comparing strings to number in ids: 1 != '1'
+    setDietrec(dietrec.filter(d => d != e.target.value))
   }
+
+  console.log(dietrec)
 
     return (
         <div>
@@ -61,7 +68,7 @@ function Create() {
               !diets?null:<label>Diets: <select name='diets' onChange={e => handleDiets(e)}>
                 <option defaultValue={true} value={0}>Choose your diet!</option>
                 {diets.map(d => {
-                  return <option key={d.id} value={d.id} className={dietRec.includes(`${d.id}`)?'dietchose':'dietunchose'}>
+                  return <option key={d.id} value={d.id} className={dietrec.includes(`${d.id}`)?'dietchose':'dietunchose'}>
                     {d.name}
                   </option>
                 })}
@@ -69,10 +76,10 @@ function Create() {
               </label>
             }
             {
-              !dietRec?null:dietRec.map(d => {
+              !dietrec?null:dietrec.map(d => {
                 return (<div key={d}>
                   <span>{d}</span>
-                  <button value={d.id} onClick={e => handleDelete(e)}>X</button>
+                  <button value={d} onClick={e => handleDelete(e)}>X</button>
                 </div>)
               })
             }
