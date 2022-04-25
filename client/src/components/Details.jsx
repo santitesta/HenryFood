@@ -11,7 +11,7 @@ function Details({meal}) {
   }
   return (
     <>
-      <NavLink to='/'>HOME BRODI</NavLink>
+      <NavLink to='/'>Return</NavLink>
       <div className='container'>
         <h1>Those are the details of {rec.title}!</h1>
         <img src={rec.image} alt={`${rec.title} not found`} />

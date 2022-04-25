@@ -1,7 +1,21 @@
+.allhome {
+  display: flex;
+  justify-content: center;
+}
+
 .home {
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.filters {
+  width: 330px;
+  margin-top: 150px;
+  position: fixed;
+  margin-left: 40px;
+  backdrop-filter: brightness(60%);
+  border: solid 1px black;
 }
 
 .bro {
@@ -14,11 +28,6 @@
   column-count: 1;
   width: 1000px;
   margin-left: 400px;
-}
-
-.filters {
-  position: fixed;
-  margin-left: 70px;
 }
 
 .meal {

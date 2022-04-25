@@ -3,6 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createRecipe, getAllDiets } from "../redux/actions"
 import './Create.css'
 
+// export function validate(input) {
+//   let errors = {};
+//   if (!input.username) {
+//     errors.username = 'Username is required';
+//   } else if (!/\S+@\S+\.\S+/.test(input.username)) {
+//     errors.username = 'Username is invalid';
+//   }
+//   if (!input.password) {
+//     errors.password = 'Password is required';
+//   } else if ((!/(?=.*[0-9])/.test(input.password))) {
+//     errors.password = 'Password is invalid';
+//   }
+//   return errors;
+// };
+
 function Create() {
   const dispatch = useDispatch();
   const diets = useSelector(state => state.diets)
@@ -47,50 +62,48 @@ function Create() {
     setDietrec(dietrec.filter(d => d != e.target.value))
   }
 
-  console.log(dietrec)
-
-    return (
-        <div>
-          <form type="submit">
-            <label>Name: <input onChange={e => handleChange(e)} type="text" id='' name='name' placeholder='Name your recipe...' /></label>
-            <br />
-            <label>Status<select onChange={e => handleChange(e)} name='status'>
-              <option defaultValue={true}>Salado mi bro</option>
-              <option >Dulzón mi pana</option>
-            </select>
+  return (
+      <div className='condet'>
+        <form type="submit" className='form1'>
+          <label>Name: <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='name' placeholder='Name your recipe...' /></label>
+          <br />
+          <label>Status<select className='inputsc' onChange={e => handleChange(e)} name='status'>
+            <option defaultValue={true}>Salado mi bro</option>
+            <option >Dulzón mi pana</option>
+          </select>
+          </label>
+          <br />
+          <label>Species: <input className='listsc' onChange={e => handleChange(e)} type="text" id='' name='species' placeholder='Fill the specie...' /></label>
+          <br />
+          <label>Image: <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='image' placeholder='Insert image as url...' /></label>
+          <br />
+          {
+            !diets?null:<label>Diets: <select className='listsc' name='diets' onChange={e => handleDiets(e)}>
+              <option defaultValue={true} value={0}>Choose your diet!</option>
+              {diets.map(d => {
+                return <option key={d.id} value={d.id} className={dietrec.includes(`${d.id}`)?'dietchose':'dietunchose'}>
+                  {d.name}
+                </option>
+              })}
+              </select>
             </label>
-            <br />
-            <label>Species: <input onChange={e => handleChange(e)} type="text" id='' name='species' placeholder='Fill the specie...' /></label>
-            <br />
-            <label>Image: <input onChange={e => handleChange(e)} type="text" id='' name='image' placeholder='Insert image as url...' /></label>
-            <br />
-            {
-              !diets?null:<label>Diets: <select name='diets' onChange={e => handleDiets(e)}>
-                <option defaultValue={true} value={0}>Choose your diet!</option>
-                {diets.map(d => {
-                  return <option key={d.id} value={d.id} className={dietrec.includes(`${d.id}`)?'dietchose':'dietunchose'}>
-                    {d.name}
-                  </option>
-                })}
-                </select>
-              </label>
-            }
-            {
-              !dietrec?null:dietrec.map(d => {
-                return (<div key={d}>
-                  <span>{d}</span>
-                  <button value={d} onClick={e => handleDelete(e)}>X</button>
-                </div>)
-              })
-            }
-            <br />
-            <button type="submit" onClick={e => handleSubmit(e)}>
-              Create Recipe!
-            </button>
-          </form>
-          <p>Here you gonna charge your own recipe</p>
-        </div>
-    );
-  };
-  
-  export default Create;
+          }
+          {
+            !dietrec?null:dietrec.map(d => {
+              return (<div key={d}>
+                <span>{d}</span>
+                <button value={d} onClick={e => handleDelete(e)}>X</button>
+              </div>)
+            })
+          }
+          <br />
+          <button type="submit" onClick={e => handleSubmit(e)}>
+            Create Recipe!
+          </button>
+        </form>
+        <p>Here you gonna charge your own recipe</p>
+      </div>
+  );
+};
+
+export default Create;

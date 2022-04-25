@@ -3,21 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getAllRecipes } from "../redux/actions"
 import './Home.css'
-
-// export function validate(input) {
-//   let errors = {};
-//   if (!input.username) {
-//     errors.username = 'Username is required';
-//   } else if (!/\S+@\S+\.\S+/.test(input.username)) {
-//     errors.username = 'Username is invalid';
-//   }
-//   if (!input.password) {
-//     errors.password = 'Password is required';
-//   } else if ((!/(?=.*[0-9])/.test(input.password))) {
-//     errors.password = 'Password is invalid';
-//   }
-//   return errors;
-// };
+import MealDisplay from './MealDisplay';
+// import MealDisplay from './MealDisplay.jsx'
 
 function Home({handleDetails}) {
   const dispatch = useDispatch();
@@ -28,8 +15,21 @@ function Home({handleDetails}) {
   }, [dispatch])
 
   const [query, setQuery] = useState([])
+  // const [diet, setDiet] = useState([])
 
-  console.log(recipes)
+  // <form id="myForm" onSubmit={(e) => {
+  //   e.preventDefault();
+  //   onSearch(city);
+  //   document.getElementById("myForm")[0].value = '';
+  // }}>
+  //   <input
+  //     type="text"
+  //     placeholder="Ciudad..."
+  //     value={city}
+  //     onChange={e => setCity(e.target.value)}
+  //   />
+  //   <input type="submit" value="Agregar"/>
+  // </form>
   
   function handleChange(e) {
   let q = recipes.filter(r => r.title.toLowerCase().includes(e.target.value.toLowerCase()))
@@ -42,6 +42,9 @@ function Home({handleDetails}) {
     }
   }
 
+  // function onSearch()
+
+
   // function handleSubmit(e) {
   // e.preventDefault()
   // // if(errors.name || errors.status) return alert('Wrong data!')
@@ -51,14 +54,18 @@ function Home({handleDetails}) {
 
   return (
       <>
-        <h1 className='home'>Welcome to Henry Foods PI</h1>
-        
+        <div className='headline'>
+          <h1 className='home'>Welcome to Henry Foods PI</h1>
+        </div>
+
         <form type='submit' className='filters'>Filters
-          <br />
-          <input type="text" id="505" placeholder='Name...' onChange={e => handleChange(e)}/>
+          <div>
+            <input type="text" id="505" placeholder='Name...' onChange={e => handleChange(e)}/>
+          </div>
         </form>
         <br />
         <div className={query.length === 1?'bro2':'bro'}>
+          {/* <MealDisplay meal={query} onSearch={onSearch}/> */}
         {
           !query.length?recipes && recipes.map(r => {
             return(
