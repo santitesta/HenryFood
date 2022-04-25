@@ -10,7 +10,6 @@ const URL = "https://rickandmortyapi.com/api"
 const fs = require('fs')
 let jsonData = JSON.parse(fs.readFileSync('spoonacular.json', 'utf-8'))
 
-
 async function getRecipe(req,res){
   try {
     // let recipes = (await axios.get(`${URLcs}&query=pasta`)).data.results
