@@ -22,7 +22,7 @@ export const getAllDiets = () => {
 export const createRecipe = (recipe) => {
     return function(dispatch){
         return axios.post("http://localhost:3001/recipe", recipe)
-            .then(resp => console.log('Recipe created successfully!'))
+            .then(resp => alert('Recipe created successfully!'))
             .catch(error => console.log(error))
     }
 }
