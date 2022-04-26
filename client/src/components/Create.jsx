@@ -65,43 +65,65 @@ function Create() {
   return (
       <div className='condet'>
         <form type="submit" className='form1'>
-          <label>Name: <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='name' placeholder='Name your recipe...' /></label>
+
+          <div className='minicont'>
+            <label>Name</label>
+            <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='name' placeholder='Name your recipe...' />
+          </div>
+
           <br />
-          <label>Status<select className='inputsc' onChange={e => handleChange(e)} name='status'>
-            <option defaultValue={true}>Salado mi bro</option>
-            <option >Dulzón mi pana</option>
-          </select>
-          </label>
+
+          <div className='minicont'>
+            <label>Status</label>
+            <select className='listsc' onChange={e => handleChange(e)} name='status'>
+              <option defaultValue={true}>Salado mi bro</option>
+              <option >Dulzón mi pana</option>
+            </select>
+          </div>
+
           <br />
-          <label>Species: <input className='listsc' onChange={e => handleChange(e)} type="text" id='' name='species' placeholder='Fill the specie...' /></label>
+
+          <div className='minicont'>
+            <label>Species</label>
+            <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='species' placeholder='Fill the specie...' />
+          </div>
+
           <br />
-          <label>Image: <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='image' placeholder='Insert image as url...' /></label>
+          <div className='minicont'>
+            <label>Image</label>
+            <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='image' placeholder='Insert image as url...' />
+          </div>
+
           <br />
+
           {
-            !diets?null:<label>Diets: <select className='listsc' name='diets' onChange={e => handleDiets(e)}>
-              <option defaultValue={true} value={0}>Choose your diet!</option>
-              {diets.map(d => {
-                return <option key={d.id} value={d.id} className={dietrec.includes(`${d.id}`)?'dietchose':'dietunchose'}>
-                  {d.name}
-                </option>
-              })}
+            !diets?null:<div className='minicont'>
+              <label>Diets</label>
+              <select className='listsc' name='diets' onChange={e => handleDiets(e)}>
+                <option defaultValue={true} value={0}>Choose your diet!</option>
+                {diets.map(d => {
+                  return <option key={d.id} value={d.id} className={dietrec.includes(`${d.id}`)?'dietchose':'dietunchose'}>
+                    {d.name}
+                  </option>
+                })}
               </select>
-            </label>
+            </div>
           }
           {
-            !dietrec?null:dietrec.map(d => {
-              return (<div key={d}>
-                <span>{d}</span>
-                <button value={d} onClick={e => handleDelete(e)}>X</button>
-              </div>)
-            })
+            !dietrec?null:<div className='minicont'>
+              {dietrec.map(d => {
+                return (<div key={d}>
+                  <span>{d}</span>
+                  <button value={d} onClick={e => handleDelete(e)}>X</button>
+                </div>)
+              })}
+            </div>
           }
           <br />
-          <button type="submit" onClick={e => handleSubmit(e)}>
+          <button className='submitbutton' type="submit" onClick={e => handleSubmit(e)}>
             Create Recipe!
           </button>
         </form>
-        <p>Here you gonna charge your own recipe</p>
       </div>
   );
 };

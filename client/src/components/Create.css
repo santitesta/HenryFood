@@ -2,24 +2,57 @@
   width: 600px;
   height: 450px;
   margin-left: 50%;
+  margin-top: 5%;
   transform: translateX(-50%);
   padding-bottom: 50px;
   background-image: url(https://thumbs.dreamstime.com/b/italian-food-ingredients-pasta-olive-oil-parmesan-cheese-basil-g-italian-food-ingredients-pasta-olive-oil-parmesan-cheese-basil-117926836.jpg);
   display: flex;
   flex-direction: column-reverse;
 }
+
 .form1 {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  column-count: 2;
 }
 
+.minicont{
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: red; */
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 15px;
+  font-family: 'Trebuchet MS';
+}
+
+.listsc {
+  width: 177px;
+  font-family: 'Trebuchet MS';
+}
 .inputsc {
+  width: 170px;
   border-radius: 10px;
   border-width: 2;
   border-color: darkorange;
+  font-family: 'Trebuchet MS';
 }
 
 .dietchose {
   background-color: green;
+}
+
+.submitbutton{
+  position: relative;
+  left: 25%;
+  top: 25px;
+  width: 270px;
+  height: 60px;
+  font-size: x-large;
+}
+
+.submitbutton:hover {
+  color: green;
 }

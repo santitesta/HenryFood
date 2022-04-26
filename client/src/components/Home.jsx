@@ -54,47 +54,57 @@ function Home({handleDetails}) {
 
   return (
       <>
-        <div className='headline'>
+        <div>
           <h1 className='home'>Welcome to Henry Foods PI</h1>
         </div>
 
-        <form type='submit' className='filters'>Filters
-          <div>
-            <input type="text" id="505" placeholder='Name...' onChange={e => handleChange(e)}/>
+        <form className='filters'><label className='filtertitle'>Filter your meal</label> <br />
+          <div className='columnsfil'>
+            <input className='inputquery' type="text" id="505" placeholder='Name...' onChange={e => handleChange(e)}/>
+            <label >Order alphabetically
+              <button className='filterup'/>
+              <button className='filterdown'/>
+            </label>
           </div>
         </form>
+
         <br />
+
         <div className={query.length === 1?'bro2':'bro'}>
           {/* <MealDisplay meal={query} onSearch={onSearch}/> */}
-        {
-          !query.length?recipes && recipes.map(r => {
-            return(
-              <div key={r.id} className='meal'>
-                <NavLink to="/details" onClick={e => handleDetails(e.target.title)}>
-                  <p className='title' title={r.id}>{r.title}</p>
-                </NavLink>
-                <br />
-                <NavLink to="/details" onClick={e => handleDetails(e.target.title)}>
-                  <img className="imgbro" src={r.image} alt={r.name} width="312" height="231" title={r.id} />
-                </NavLink>
-              </div>
-            )
-          })
-          :query.map(r => {
-            return(
-              <div key={r.id} className='meal'>
-                <NavLink to="/details" onClick={e => handleDetails(e.target.title)}>
-                  <p className='title' title={r.id}>{r.title}</p>
-                </NavLink>
-                <br />
-                <NavLink to="/details" onClick={e => handleDetails(e.target.title)}>
-                  <img className="imgbro" src={r.image} alt={r.name} width="312" height="231" title={r.id} />
-                </NavLink>
-              </div>
-            )
-          })
-        }
+
+          {
+            !query.length?recipes && recipes.map(r => {
+              return(
+                <div key={r.id} className='meal'>
+                  <NavLink to="/details" onClick={e => handleDetails(e.target.title)}>
+                    <p className='title' title={r.id}>{r.title}</p>
+                  </NavLink>
+                  <br />
+                  <NavLink to="/details" onClick={e => handleDetails(e.target.title)}>
+                    <img className="imgbro" src={r.image} alt={r.name} width="312" height="231" title={r.id} />
+                  </NavLink>
+                </div>
+              )
+            })
+
+            :query.map(r => {
+              return(
+                <div key={r.id} className='meal'>
+                  <NavLink to="/details" onClick={e => handleDetails(e.target.title)}>
+                    <p className='title' title={r.id}>{r.title}</p>
+                  </NavLink>
+                  <br />
+                  <NavLink to="/details" onClick={e => handleDetails(e.target.title)}>
+                    <img className="imgbro" src={r.image} alt={r.name} width="312" height="231" title={r.id} />
+                  </NavLink>
+                </div>
+              )
+            })
+          }
+
         </div>
+
       </>
   );
 };

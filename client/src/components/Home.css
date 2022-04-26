@@ -1,23 +1,59 @@
-.allhome {
-  display: flex;
-  justify-content: center;
+:root {
+  --backsize: cover;
+  --wh: 20px;
+  --hh: 20px;
 }
 
-.home {
+.hometitle {
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
 }
 
+/* Filters */
 .filters {
   width: 330px;
-  margin-top: 150px;
+  height: 650px;
   position: fixed;
+  margin-top: 55px;
   margin-left: 40px;
   backdrop-filter: brightness(60%);
   border: solid 1px black;
 }
 
+.filtertitle {
+  font-size: 40px;
+  color: antiquewhite;
+}
+
+.columnsfil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100px;
+  justify-content: space-between;
+  /* background-color: green; */
+}
+
+.inputquery {
+  width: 200px;
+}
+
+.filterup {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAclBMVEX///8AAACWlpZcXFz09PT6+vqQkJBISEj8/PyTk5Obm5tCQkLk5OTOzs6Dg4M+Pj7t7e3ExMSysrJRUVEMDAx6enrPz89XV1c4ODhlZWUuLi7b29uvr68oKCgICAgVFRVtbW2mpqa7u7t+fn5ra2sdHR22zjc7AAAEAElEQVR4nO2d2XKjMBBFaQO2Y4iXBCdeksn+/784JDWVwUZILQxqteueZ0L1MZt0pUhJAgAAAAAAAAAAAAAAAAAAAAAAAIA2+Wb5WKyKdHorXck4lFv6zzSTLmd4JnTKu3RBA5Pv6ZyldE3DMmsJEr1KFzUgWWEQJEql6xqM9c4oSLSfS5c2DJ2CRPdXobju9KsppKsbgPKPzZAOa+kCL+VoFyTaKVc8OvxqXlQr3roFa0rpMvuzYQkSHaUL7cs7U1Ct4h1bkEhlf+rJQ5BoI12uPwsvQYW9qRtPQaIn6ZL9mHoLEr1JF+3DRw9Bool02Xz6CRLdSBfOpZ1YcPmQLp1Hf0Edinl6gSDRp3T9bu4vEiTaSws4yEyhmh9xJxvZ4WLBWjGX1ujGkjn5UEQb+a+rQQSJDpFexXIoQaLnKJMNZ+bkw0uEyQYjc9Kt+DCsIEWXbHAzJx8epKWajCEYVbLhkzmpVPTLnHyIJNnwzZzUKY4pSLSQ1mvPsbg6xeXIguJzNsYXFFZ8DSBItL12QbmZN/PHQIJi01KYkczO9qwumanATMAvZ4Zqq9z2wVzkK95pwoc3c+aPX+TWL+Ykyc0zwlrsQt+ozCs4m9vbBJP6t2Ke6j6sILMlk7qO/RluYqbkQYemrDO5zgTdhlzFkPEUrynz70vtNmQOxwUctsm+PAQ5hsnWcswvX+GSYlbs9Nuc5BjyhsXDJTecaQjT36NZhizFcGPEjHuqUQzPkNOTDtcEd7e4m/MqmIbJm/Osr8EMndfwZOII19CtGO4auj4WdydHsw2dsWu4vrBj0uHZBC6+oeeJR6T0qsPD0DHlNuBoja1r2Ppo+RhaP7UhO4mWB6Y9ZORlaBulCxryd/V4KsOYmJ9h978vPI6v1aCrc2F6UjwNk/LFfGzgkW/jfVoZXwW+hsna2LAPPpxoUDyY2/7ehknWDm8qgZng5XnAsu0Ii/wNk/y8wziTGdZ/aj4ws867qIdh/UpthrHPcpPAN9vn7zdftbqxzCvoZVjfI4vZ9y9Y7ZbC/6qQHY+OO6in4c/Jy2gngDW5wFAJMNQPDPUDQ/3AUD8w1A8M9QND/cBQPzDUDwz1A0P9wFA/MNQPDPUDQ/3AUD8w1A8M9QND/cBQPzDUDwz1A0P9wFA/MNQPDPUDQ/3AUD8w1A8M9QND/cBQPzDUDwz1c/2G1tU9pYsbBNua9HfuP1eAbc2l6Hax6MW8ewOhQ9Q7H/HpftVcx4smSbKuLXYqFatecHjrMFS1p6Md8yKzqXRZQ2Ja4E1ije7xyNubIu4j3ZirN+dbtUSx+8iwZM0VM5dX8xY95XaaFqsinarcoxoAAAAAAAAAAAAAAAAAAAAAAAAYn78qCzHnX26BOQAAAABJRU5ErkJggg==);  
+  background-size: cover;
+  width: var(--wh);
+  height: var(--hh);
+}
+
+.filterdown {
+  background-image: url(data:image/jpeg;base64,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);  
+  background-size: var(--backsize);
+  width: var(--wh);
+  height: var(--hh);
+}
+
+/* Meals */
 .bro {
   column-count: 2;
   width: 1000px;
@@ -49,10 +85,4 @@
   height: 200px;
   object-fit: cover;
 }
-
-.cropped1 {
-  width: 200px; /* width of container */
-  height: 200px; /* height of container */
-  object-fit: cover;
-  border: 5px solid black;
-}
+/*  */
