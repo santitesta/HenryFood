@@ -28,9 +28,10 @@ function Create() {
 
   const [recipe, setRecipe] = useState({
     name: "",
-    status: "Salado mi bro",
-    species: "",
-    img: "",
+    summary: "Salado mi bro",
+    points: "",
+    healthScore:"",
+    image: ""
   })
 
   const [dietrec, setDietrec] = useState([])
@@ -74,8 +75,8 @@ function Create() {
           <br />
 
           <div className='minicont'>
-            <label>Status</label>
-            <select className='listsc' onChange={e => handleChange(e)} name='status'>
+            <label>Summary</label>
+            <select className='listsc' onChange={e => handleChange(e)} name='summary'>
               <option defaultValue={true}>Salado mi bro</option>
               <option >Dulzón mi pana</option>
             </select>
@@ -84,8 +85,8 @@ function Create() {
           <br />
 
           <div className='minicont'>
-            <label>Species</label>
-            <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='species' placeholder='Fill the specie...' />
+            <label>Spoonacular Score</label>
+            <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='points' placeholder='Fill the specie...' />
           </div>
 
           <br />

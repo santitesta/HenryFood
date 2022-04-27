@@ -13,7 +13,7 @@
 /* Filters */
 .filters {
   width: 330px;
-  height: 650px;
+  height: 500px;
   position: fixed;
   margin-top: 55px;
   margin-left: 40px;
@@ -30,13 +30,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100px;
+  height: 150px;
   justify-content: space-between;
   /* background-color: green; */
 }
 
 .inputquery {
   width: 200px;
+  margin-top: 20px;
+}
+
+.labelbro{
+  color: antiquewhite;
 }
 
 .filterup {
@@ -57,27 +62,41 @@
 .bro {
   column-count: 2;
   width: 1000px;
-  margin-left: 400px;
-}
-
-.bro2 {
-  column-count: 1;
-  width: 1000px;
+  height: 1600px;
   margin-left: 400px;
 }
 
 .meal {
-  height: 250px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 3;
+  overflow: hidden;
 }
 
 .title {
   margin: 0 auto;
   padding: 0px 15px;
-  width: 200px;
+  width: 250px;
   background-color: gold;
-  /* display: inline; */
   text-decoration: none;
   color: black;
+}
+
+.spandiets {
+  background-color: darkgoldenrod;
+  width: 250px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.navlinktitle {
+  text-decoration: none;
+}
+
+.navlinkimg {
+  width: 300px;
+  margin-left: 90px;
 }
 
 .imgbro {

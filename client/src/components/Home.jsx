@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getAllRecipes } from "../redux/actions"
 import './Home.css'
-import MealDisplay from './MealDisplay';
-// import MealDisplay from './MealDisplay.jsx'
+// import MealDisplay from './MealDisplay';
 
-function Home({handleDetails}) {
+function Home({meal, handleDetails, onSearch}) {
   const dispatch = useDispatch();
   const recipes = useSelector(state => state.recipes) //When an action is dispatched, useSelector() will do a reference comparison of the previous selector result value and the current result value. If they are different, the component will be forced to re-render. If they are the same, the component will not re-render.
   //Con useSelector traigo el estado global. Con useEffect, afecto al componente por su estado local.
@@ -17,51 +16,31 @@ function Home({handleDetails}) {
   const [query, setQuery] = useState([])
   // const [diet, setDiet] = useState([])
 
-  // <form id="myForm" onSubmit={(e) => {
-  //   e.preventDefault();
-  //   onSearch(city);
-  //   document.getElementById("myForm")[0].value = '';
-  // }}>
-  //   <input
-  //     type="text"
-  //     placeholder="Ciudad..."
-  //     value={city}
-  //     onChange={e => setCity(e.target.value)}
-  //   />
-  //   <input type="submit" value="Agregar"/>
-  // </form>
-  
-  function handleChange(e) {
-  let q = recipes.filter(r => r.title.toLowerCase().includes(e.target.value.toLowerCase()))
-  if(q.length) setQuery(q)
-  else {
-    setQuery([])
-    alert('No search like that, try again')
-    let inp = document.getElementById('505')
-    inp.value = ''
-    }
+  function handleSubmit(e) {
+    e.preventDefault()
+    // if(errors.name || errors.status) return alert('Wrong data!')
+    onSearch(query)
   }
-
-  // function onSearch()
-
-
-  // function handleSubmit(e) {
-  // e.preventDefault()
-  // // if(errors.name || errors.status) return alert('Wrong data!')
-  // let newRec = {...recipes, diet: dietrec.map(d => parseInt(d))}
-  // dispatch(createRecipe(newRec))
-  // }
-
+  
   return (
       <>
         <div>
           <h1 className='home'>Welcome to Henry Foods PI</h1>
         </div>
 
-        <form className='filters'><label className='filtertitle'>Filter your meal</label> <br />
+        <form id='myForm' className='filters' onSubmit={e => handleSubmit(e)}><label className='filtertitle'>Filter your meal</label> <br />
           <div className='columnsfil'>
-            <input className='inputquery' type="text" id="505" placeholder='Name...' onChange={e => handleChange(e)}/>
-            <label >Order alphabetically
+            <input className='inputquery' type="text" 
+              id="505"
+              placeholder='Name...' 
+              value={query} 
+              onChange={e => setQuery(e.target.value)}/>
+            <button type='submit'>Filtrar bro</button>
+            <label className='labelbro'>Order alphabetically
+              <button className='filterup'/>
+              <button className='filterdown'/>
+            </label>
+            <label className='labelbro'>Order by punctuation
               <button className='filterup'/>
               <button className='filterdown'/>
             </label>
@@ -70,33 +49,19 @@ function Home({handleDetails}) {
 
         <br />
 
-        <div className={query.length === 1?'bro2':'bro'}>
+        <div className='bro'>
           {/* <MealDisplay meal={query} onSearch={onSearch}/> */}
 
           {
-            !query.length?recipes && recipes.map(r => {
+            meal && meal.map(r => {
               return(
                 <div key={r.id} className='meal'>
-                  <NavLink to="/details" onClick={e => handleDetails(e.target.title)}>
+                  <NavLink className='navlinktitle' to="/details" onClick={e => handleDetails(e.target.title)}>
                     <p className='title' title={r.id}>{r.title}</p>
                   </NavLink>
-                  <br />
-                  <NavLink to="/details" onClick={e => handleDetails(e.target.title)}>
-                    <img className="imgbro" src={r.image} alt={r.name} width="312" height="231" title={r.id} />
-                  </NavLink>
-                </div>
-              )
-            })
-
-            :query.map(r => {
-              return(
-                <div key={r.id} className='meal'>
-                  <NavLink to="/details" onClick={e => handleDetails(e.target.title)}>
-                    <p className='title' title={r.id}>{r.title}</p>
-                  </NavLink>
-                  <br />
-                  <NavLink to="/details" onClick={e => handleDetails(e.target.title)}>
-                    <img className="imgbro" src={r.image} alt={r.name} width="312" height="231" title={r.id} />
+                  <span className='spandiets'>{r.diets?.length?r.diets:'Not part of any diet'}</span>
+                  <NavLink className='navlinkimg' to="/details" onClick={e => handleDetails(e.target.title)}>
+                    <img className="imgbro" src={r.image} alt={r.name} width="312" height="231" title={r.id}/>
                   </NavLink>
                 </div>
               )

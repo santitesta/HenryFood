@@ -1,33 +1,43 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { getRecipeById } from '../redux/actions';
 import './Details.css'
 
-function Details({meal}) {
-  const recipes = useSelector(state => state.recipes)
-  let rec = recipes.filter(r => r.id == meal)[0]
-  if (meal.length == 0) {
+function Details({id}) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getRecipeById(id))
+  },[dispatch])
+
+  const recipe = useSelector(state => state.recipe)
+
+  if (!id) {
     return <p>How did you get here? Please send review! Anyways, come again with a recipe to get details!</p>
   }
+  console.log(recipe)
   return (
     <>
       <NavLink to='/'>Return</NavLink>
-      <div className='container'>
-        <h1>Those are the details of {rec.title}!</h1>
-        <img src={rec.image} alt={`${rec.title} not found`} />
-        <p>Dish types: {rec.dishTypes}</p>
-        <p>Diets: {rec.diets.length?rec.diets:'Not part of any diet registered'}</p>
-        <p>Summary: {rec.summary}</p>
-        <p>Spoonacular score: {rec.spoonacularScore}</p>
-        <p>Health score: {rec.healthScore}</p>
+      {
+      !Object.keys(recipe).length?<span>Nada aqui</span>
+      :<div className='container'>
+        <h1>Those are the details of {recipe.title}!</h1>
+        <img src={recipe.image} alt={`${recipe.title} not found`} />
+        <p>Dish types: {recipe.dishTypes}</p>
+        <p>Diets: {recipe.diets?recipe.diets:'Not part of any diet registered'}</p>
+        <p>Summary: {recipe.summary}</p>
+        <p>Spoonacular score: {recipe.spoonacularScore}</p>
+        <p>Health score: {recipe.healthScore}</p>
         <div className='steps'>
           {
-            !rec?null:rec.analyzedInstructions[0].steps.map(s => {
+            !Object.keys(recipe).length?null:recipe.analyzedInstructions[0].steps.map(s => {
               return (<p key={s.number}>Step {s.number}: {s.step}</p>)
             })
           }
         </div>
       </div>
+      }
     </>
   )
 };

@@ -12,39 +12,36 @@ import Details from './components/Details.jsx';
 function App() {
   //Busqueda en la API
   const [meal, setMeal] = useState([]);
-  // function onSearch(query) {
-  //   fetch(`http://api.openweathermap.org/data/2.5/weather?q=${citySearch}&appid=4ae2636d8dfbdc3044bede63951a019b&units=metric`)
+  const [id, setId] = useState()
 
-  // function onSearch(mealSearch) {
-  //   fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=0c696dad87b44ab4992aff6e4ab24c8d&addRecipeInformation=true`)
-  //     .then(r => r.json())
-  //     .then(r => {
-  //       if(r.totalResults > 0) {
-  //         // let aux = {
-  //         //   name: r.results[0].title,
-  //         //   img: r.results[0].image
-  //         // }
-  //         let aux = r.results
-  //         setMeal(aux);
-  //         document.getElementById("myForm").reset();
-  //       } else {
-  //         alert("That ain't a real meal!")
-  //       }
-  //     })
-  // }
+  function onSearch(query) {
+    // 20 results search
+    // fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=0c696dad87b44ab4992aff6e4ab24c8d&addRecipeInformation=true&number=20`)
+    // 10 results search
+    fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=0c696dad87b44ab4992aff6e4ab24c8d&addRecipeInformation=true`)
+      .then(r => r.json())
+      .then(r => {
+        if(r.totalResults > 0) {
+          let aux = r.results
+          setMeal(aux);
+          document.getElementById("myForm").reset();
+        } else {
+          alert("That ain't a real meal!")
+        }
+      })
+  }
 
   function handleDetails(title) {
-    setMeal([title])
+    setId(title)
   }
 
   return (
     <div className="App">
       <Nav/>
       <Routes>
-        {/* <Route path="/" element={<Home handleDetails={handleDetails} onSearch={onSearch}/>}/> */}
-        <Route path="/" element={<Home handleDetails={handleDetails} />}/>
+        <Route path="/" element={<Home meal={meal} onSearch={onSearch} handleDetails={handleDetails}/>}/>
         <Route path="/create" element={<Create />}/>
-        <Route path='/details' element={<Details meal={meal}/>}/>
+        <Route path='/details' element={<Details id={id}/>}/>
         {/* <Route path="/About" element={<About />}/>
         <Route path='/MealDisplay' element={<MealDisplay meal={meal} onSearch={onSearch}/>}/>*/
         }
