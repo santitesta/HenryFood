@@ -22,21 +22,21 @@ module.exports = (sequelize) => {
     points: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: 'default bro'
+      defaultValue: 'mmm le damos un 8 solido'
     },
     healthness: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: 'default brodddi'
+      defaultValue: '50 panita'
     },
     steps: {
       type: DataTypes.TEXT,
       allowNull: false,
-      defaultValue: 'default broderson'
+      defaultValue: 'paso 1 abrir rappi paso 2 recibir'
     },
-    img: {
-      type: DataTypes.TEXT,
-      allowNull: false,
+    image: {
+      type: DataTypes.TEXT
+      // allowNull: false
     }
   },
   {timestamps: false}
