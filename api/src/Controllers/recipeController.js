@@ -23,6 +23,7 @@ async function getRecipe(req,res){
     // })
 
     let recipes = jsonData.results
+    console.log(recipes)
 
     let allRecipes = (await Recipes.findAll()).concat(recipes)
 
