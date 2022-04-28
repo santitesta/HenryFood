@@ -3,9 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getAllRecipes } from "../redux/actions"
 import './Home.css'
+import Pagination from './Pagination';
+import Posts from './Posts';
 // import MealDisplay from './MealDisplay';
 
-function Home({meal, handleDetails, onSearch}) {
+function Home({
+  meal, handleDetails, onSearch,
+  posts, loading,
+  postsPerPage,totalPosts,paginate
+}) {
   const dispatch = useDispatch();
   const recipes = useSelector(state => state.recipes) //When an action is dispatched, useSelector() will do a reference comparison of the previous selector result value and the current result value. If they are different, the component will be forced to re-render. If they are the same, the component will not re-render.
   //Con useSelector traigo el estado global. Con useEffect, afecto al componente por su estado local.
@@ -26,6 +32,8 @@ function Home({meal, handleDetails, onSearch}) {
       <>
         <div>
           <h1 className='home'>Welcome to Henry Foods PI</h1>
+          {/* <button>Anterior</button>
+          <button>Siguiente</button> */}
         </div>
 
         <form id='myForm' className='filters' onSubmit={e => handleSubmit(e)}><label className='filtertitle'>Filter your meal</label> <br />
@@ -48,11 +56,19 @@ function Home({meal, handleDetails, onSearch}) {
         </form>
 
         <br />
-
+        <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={totalPosts}
+          paginate={paginate}
+        />
+        {/* <div className='bro'> */}
         <div className='bro'>
           {/* <MealDisplay meal={query} onSearch={onSearch}/> */}
+          
+          <Posts posts={posts} loading={loading} />
 
-          {
+
+          {/* {
             meal && meal.map(r => {
               return(
                 <div key={r.id} className='meal'>
@@ -66,7 +82,7 @@ function Home({meal, handleDetails, onSearch}) {
                 </div>
               )
             })
-          }
+          } */}
 
         </div>
 

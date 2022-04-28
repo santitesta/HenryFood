@@ -61,9 +61,10 @@
 /* Meals */
 .bro {
   column-count: 2;
-  width: 1000px;
+  width: 800px;
   height: 1600px;
   margin-left: 400px;
+  background-color: green;
 }
 
 .meal {
