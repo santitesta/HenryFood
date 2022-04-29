@@ -10,11 +10,11 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
 
   return (
     <nav className='paginationnav'>
-    {pageNumbers.map(number => (
+      {pageNumbers.map(number => (
         <button key={number} onClick={() => paginate(number)}>
             {number}
         </button>
-        ))}
+      ))}
     </nav>
   );
 };

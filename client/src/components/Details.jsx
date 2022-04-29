@@ -20,10 +20,10 @@ function Details({id}) {
     <>
       <NavLink to='/'>Return</NavLink>
       {
-      !Object.keys(recipe).length?<span>Nada aqui</span>
+      !Object.keys(recipe).length?<h1>Loading...</h1>
       :<div className='container'>
-        <h1>Those are the details of {recipe.title}!</h1>
-        <img src={recipe.image} alt={`${recipe.title} not found`} />
+        <h1>Those are the details of {recipe.name}!</h1>
+        <img src={recipe.image} alt={`${recipe.name} not found`} />
         <p>Dish types: {recipe.dishTypes}</p>
         <p>Diets: {recipe.diets?recipe.diets:'Not part of any diet registered'}</p>
         <p>Summary: {recipe.summary}</p>

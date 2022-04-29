@@ -2,38 +2,44 @@ import './App.css';
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from "react-router-dom";
 
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllDiets, getRecipes } from './redux/actions';
+
 import Home from './components/Home.jsx'
 import Create from './components/Create';
 import Nav from './components/Nav.jsx'
 import Details from './components/Details.jsx';
 import Posts from './components/Posts.jsx'
 import Pagination from './components/Pagination.jsx'
-import axios from 'axios';
-// import About from './components/About.jsx'
-// import MealDisplay from './components/MealDisplay.jsx';
 
 function App() {
-  //Busqueda en la API
+  let dispatch = useDispatch()
   const [meal, setMeal] = useState([]);
   const [id, setId] = useState()
 
+  const recipes = useSelector(state => state.recipes)
+  
+  useEffect(() => {
+    dispatch(getAllDiets())
+  }, [dispatch] )
+  
+  useEffect(() => {
+    setMeal(recipes)
+  }, [recipes] )
+  
+  // Can i delete posts and only use meal?
+  useEffect(() => {
+      setPosts(meal)
+  }, [meal] );
+
+  // * Store> *
+
   // Find recipes by name
   // Puedo pasar esta funcion solo a home? Si puedo, queda mejor ordenado?
-  function onSearch(query) {
-    // 20 results search
-    // fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=0c696dad87b44ab4992aff6e4ab24c8d&addRecipeInformation=true&number=20`)
-    // 10 results search
-    fetch(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=0c696dad87b44ab4992aff6e4ab24c8d&addRecipeInformation=true`)
-      .then(r => r.json())
-      .then(r => {
-        if(r.totalResults > 0) {
-          let aux = r.results
-          setMeal(aux);
-          document.getElementById("myForm").reset();
-        } else {
-          alert("That ain't a real meal!")
-        }
-      })
+  async function onSearch(query) {
+    setLoading(true)
+    await dispatch(getRecipes(query))
+    setLoading(false)
   }
 
   // Details id
@@ -45,23 +51,7 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(10);
-
-  useEffect(() => {
-    // Luego de setMeal en onSearch, tengo todo en el estado meal y lo paso a los posts
-    // setPosts(meal)
-
-    const fetchPosts = async () => {
-      setLoading(true);
-      // const res = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=pasta&apiKey=0c696dad87b44ab4992aff6e4ab24c8d&addRecipeInformation=true`);
-      const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
-      // setPosts(res.data.results);
-      setPosts(res.data);
-      setLoading(false);
-    };
-
-    fetchPosts();
-  }, []);
+  const [postsPerPage] = useState(9);
 
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;

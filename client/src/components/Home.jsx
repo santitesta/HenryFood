@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { getAllRecipes } from "../redux/actions"
+import { getAllDiets } from "../redux/actions"
+
 import './Home.css'
+
 import Pagination from './Pagination';
 import Posts from './Posts';
-// import MealDisplay from './MealDisplay';
 
 function Home({
   meal, handleDetails, onSearch,
@@ -13,77 +13,100 @@ function Home({
   postsPerPage,totalPosts,paginate
 }) {
   const dispatch = useDispatch();
-  const recipes = useSelector(state => state.recipes) //When an action is dispatched, useSelector() will do a reference comparison of the previous selector result value and the current result value. If they are different, the component will be forced to re-render. If they are the same, the component will not re-render.
-  //Con useSelector traigo el estado global. Con useEffect, afecto al componente por su estado local.
-  useEffect(() => {
-    dispatch(getAllRecipes())
-  }, [dispatch])
-
+  const diets = useSelector(state => state.diets)
   const [query, setQuery] = useState([])
-  // const [diet, setDiet] = useState([])
+  const [postss, setPostss] = useState([])
+
+
+  // console.log('Posts: ',posts)
+  // console.log('Postss: ',postss)
+  // console.log('Points: ',posts.map(e => e.points))
+  // console.log('Pointssss: ',postss.map(e => e.points))
+  // console.log('Points: ',posts.map(e => e.spoonacularScore))
+  // console.log('Pointssss: ',postss.map(e => e.spoonacularScore))
+
+  useEffect(() => {
+    dispatch(getAllDiets())
+  }, [dispatch])
 
   function handleSubmit(e) {
     e.preventDefault()
-    // if(errors.name || errors.status) return alert('Wrong data!')
-    onSearch(query)
+    if(query != '') {
+      onSearch(query)
+      setQuery('')
+    }
+  }
+
+  function orderAlph() {
+    setPostss(posts.sort((a,b) => (a.title.toLowerCase() < b.title.toLowerCase()) ? 1 : -1))
+  }
+
+  function orderAlphRev() {
+    setPostss(posts.sort((a,b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1 : -1))
+  }
+
+  function orderByPoints() {
+    // setPostss(posts.sort((a,b)=> a.spoonacularScore - b.spoonacularScore).reverse())
+    setPostss(posts.sort((a,b)=> a.points - b.points).reverse())
   }
   
+  function orderByPointsRev() {
+    // setPostss(posts.sort((a,b)=> a.spoonacularScore - b.spoonacularScore))
+    setPostss(posts.sort((a,b)=> a.points - b.points))
+  }
+  
+  function filterPosts() {
+    posts.sort()
+  }
+
   return (
       <>
         <div>
           <h1 className='home'>Welcome to Henry Foods PI</h1>
-          {/* <button>Anterior</button>
-          <button>Siguiente</button> */}
         </div>
 
         <form id='myForm' className='filters' onSubmit={e => handleSubmit(e)}><label className='filtertitle'>Filter your meal</label> <br />
           <div className='columnsfil'>
-            <input className='inputquery' type="text" 
-              id="505"
-              placeholder='Name...' 
-              value={query} 
-              onChange={e => setQuery(e.target.value)}/>
-            <button type='submit'>Filtrar bro</button>
+            <div>
+              <input className='inputquery' type="text"
+                id="505"
+                placeholder='Name...' 
+                value={query} 
+                onChange={e => setQuery(e.target.value)}/>
+              <button type='submit'>Filtrar bro</button>
+            </div>
+
+            <select name="diets" id="909" onChange={e => filterPosts(e)}>
+              <option defaultValue={true}>Filter by diet!</option>
+              {diets.map(d => {
+                return <option key={d.id} value={d.id}>{d.name}</option>
+              })}
+            </select>
+
             <label className='labelbro'>Order alphabetically
-              <button className='filterup'/>
-              <button className='filterdown'/>
+              <button className='filterdownAlph' onClick={orderAlphRev}>A-Z</button>
+              <button className='filterupAlph' onClick={orderAlph}>Z-A</button>
             </label>
+
             <label className='labelbro'>Order by punctuation
-              <button className='filterup'/>
-              <button className='filterdown'/>
+              <button className='filterdownPoints' onClick={orderByPoints}/>
+              <button className='filterupPoints' onClick={orderByPointsRev}/>
             </label>
+
+            <Pagination
+              postsPerPage={postsPerPage}
+              totalPosts={totalPosts}
+              paginate={paginate}
+            />
           </div>
         </form>
 
         <br />
-        <Pagination
-          postsPerPage={postsPerPage}
-          totalPosts={totalPosts}
-          paginate={paginate}
-        />
+
         {/* <div className='bro'> */}
         <div className='bro'>
           {/* <MealDisplay meal={query} onSearch={onSearch}/> */}
-          
-          <Posts posts={posts} loading={loading} />
-
-
-          {/* {
-            meal && meal.map(r => {
-              return(
-                <div key={r.id} className='meal'>
-                  <NavLink className='navlinktitle' to="/details" onClick={e => handleDetails(e.target.title)}>
-                    <p className='title' title={r.id}>{r.title}</p>
-                  </NavLink>
-                  <span className='spandiets'>{r.diets?.length?r.diets:'Not part of any diet'}</span>
-                  <NavLink className='navlinkimg' to="/details" onClick={e => handleDetails(e.target.title)}>
-                    <img className="imgbro" src={r.image} alt={r.name} width="312" height="231" title={r.id}/>
-                  </NavLink>
-                </div>
-              )
-            })
-          } */}
-
+          <Posts posts={postss.length?postss:posts} loading={loading} handleDetails={handleDetails} />
         </div>
 
       </>

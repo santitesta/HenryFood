@@ -3,20 +3,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createRecipe, getAllDiets } from "../redux/actions"
 import './Create.css'
 
-// export function validate(input) {
-//   let errors = {};
-//   if (!input.username) {
-//     errors.username = 'Username is required';
-//   } else if (!/\S+@\S+\.\S+/.test(input.username)) {
-//     errors.username = 'Username is invalid';
-//   }
-//   if (!input.password) {
-//     errors.password = 'Password is required';
-//   } else if ((!/(?=.*[0-9])/.test(input.password))) {
-//     errors.password = 'Password is invalid';
-//   }
-//   return errors;
-// };
+function validate(input, item) {
+  let errors = {}
+  console.log(Number(input.points))
+
+  if(item === 'name') {
+    if(!input.name) errors.name = 'Must have a name'
+  }
+
+  if(item === 'points') {
+    // if(typeof(input.name) !== 'number' && input.value >= 0 && input.value <= 100) {
+    if(Number(input.points) < 0 || Number(input.points) > 100) {
+      errors.points = 'Must be a number between 0 and 100'
+    }
+  }
+
+  return errors
+}
 
 function Create() {
   const dispatch = useDispatch();
@@ -26,15 +29,9 @@ function Create() {
     dispatch(getAllDiets())
   }, [dispatch])
 
-  const [recipe, setRecipe] = useState({
-    name: "",
-    summary: "Salado mi bro",
-    points: "",
-    healthScore:"",
-    image: ""
-  })
-
+  const [recipe, setRecipe] = useState({})
   const [dietrec, setDietrec] = useState([])
+  const [errors, setErrors] = useState({});
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -43,12 +40,22 @@ function Create() {
     dispatch(createRecipe(newRec))
   }
 
-  function handleChange(event) {
-    setRecipe({...recipe, [event.target.name]:event.target.value})
+  function handleChange(e) {
+    let item = e.target.name
+
+    if(item === 'name') {
+      setErrors(validate({...recipe, [item]:e.target.value }, item))
+      setRecipe({...recipe, [item]:e.target.value})
+    }
+
+    if(item === 'points') {
+      setErrors(validate({...recipe, [item]:e.target.value }, item))
+      setRecipe({...recipe, [item]:e.target.value})
+    }
+
   }
 
   function handleDiets(e) {
-    console.log('entro a handle diets: e.target: ',e.target,'e.target.value: ',e.target.value )
     if(e.target.value == 0) return;
     if (!dietrec.includes(e.target.value)) {
       setDietrec([...dietrec, e.target.value])
@@ -57,8 +64,6 @@ function Create() {
 
   function handleDelete(e) {
     e.preventDefault()
-    console.log('entro al delete, target value: ',e.target.value)
-    console.log('dietrec: ',dietrec)
     //There's a problem comparing strings to number in ids: 1 != '1'
     setDietrec(dietrec.filter(d => d != e.target.value))
   }
@@ -68,7 +73,7 @@ function Create() {
         <form type="submit" className='form1'>
 
           <div className='minicont'>
-            <label>Name</label>
+            <label className={errors.name?'nashe':null}>Name</label>
             <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='name' placeholder='Name your recipe...' />
           </div>
 
@@ -76,17 +81,19 @@ function Create() {
 
           <div className='minicont'>
             <label>Summary</label>
-            <select className='listsc' onChange={e => handleChange(e)} name='summary'>
-              <option defaultValue={true}>Salado mi bro</option>
-              <option >Dulzón mi pana</option>
-            </select>
+            <input className='inputsc' onChange={e => handleChange(e)} name='summary' placeholder='Whats the deal?...'/>
           </div>
 
           <br />
 
           <div className='minicont'>
-            <label>Spoonacular Score</label>
-            <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='points' placeholder='Fill the specie...' />
+            <label>Score</label>
+            <input className='inputsc' onChange={e => handleChange(e)} type="number" id='' name='points' placeholder='Score out of 100...' />
+          </div>
+
+          <div className='minicont'>
+            <label>Healthness</label>
+            <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='healthness' placeholder='Score out of 100...' />
           </div>
 
           <br />
@@ -120,7 +127,15 @@ function Create() {
               })}
             </div>
           }
-          <br />
+
+          <div className='minicont'>
+            {Object.keys(errors).length?<h4>Fix those before creating: </h4>:<h4>Free to go</h4>}
+          </div>
+
+          <div className='minicont'>
+            <h4>{errors.name?errors.name:'Alright!'}</h4>
+          </div>
+
           <button className='submitbutton' type="submit" onClick={e => handleSubmit(e)}>
             Create Recipe!
           </button>
