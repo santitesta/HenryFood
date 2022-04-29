@@ -17,26 +17,27 @@ module.exports = (sequelize) => {
     summary: {
       type: DataTypes.TEXT,
       allowNull: false,
-      defaultValue: 'bro'
+      defaultValue: 'No summary available'
     },
     points: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: 'mmm le damos un 8 solido'
+      defaultValue: '-'
     },
     healthness: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: '50 panita'
+      defaultValue: '-'
     },
     steps: {
       type: DataTypes.TEXT,
       allowNull: false,
-      defaultValue: 'paso 1 abrir rappi paso 2 recibir'
+      defaultValue: 'No steps defined'
     },
     image: {
-      type: DataTypes.TEXT
-      // allowNull: false
+      type: DataTypes.TEXT,
+      allowNull: false,
+      defaultValue: 'No image presented'
     }
   },
   {timestamps: false}

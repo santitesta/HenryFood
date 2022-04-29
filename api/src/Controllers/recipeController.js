@@ -4,26 +4,26 @@ const { Recipes, Diets } = require("../db")
 require('dotenv').config();
 const { apiKey } = process.env;
 const URLid = "https://api.spoonacular.com/recipes/"
-// const URLcs = "https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&${apiKey}"
+const URLcs = `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&apiKey=${apiKey}`
 
 const fs = require('fs')
 let jsonData = JSON.parse(fs.readFileSync('spoonacular.json', 'utf-8'))
 
 async function getRecipe(req,res){
   try {
-    // let recipes = (await axios.get(`${URLcs}&query=${query}`)).data.results
+    // let query = req.query.query
+    // let recipes = (await axios.get(`${URLcs}&query=${query}&number=90`)).data.results
     // .map(e => {
     //   return {
     //     id: e.id,
-    //     name: e.name,
+    //     title: e.title,
     //     summary: e.summary,
-    //     points: e.points,
+    //     points: e.spoonacularScore,
     //     image: e.image
     //   }
     // })
 
     let recipes = jsonData.results
-    console.log(recipes)
 
     let allRecipes = (await Recipes.findAll()).concat(recipes)
 
@@ -59,10 +59,9 @@ async function createRecipe(req,res){
   Recipes.create(recipe)
     .then(resp => {
       resp.addDiets(diet)
-      res.send("Recetas cargadas padre")
+      res.send("Succesfully done!")
     })
-    .then(recipe => console.log(recipe))
-    .catch(error => console.log(error))
+    .catch(error => res.send('Cannot create recipe'))
 }
 
 module.exports = {

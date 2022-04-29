@@ -39,7 +39,6 @@ apiDiets = [{
 
 async function getDiets(req,res){
   let diets = await Diets.findAll()
-  console.log(diets)
   res.send(diets)
 }
 
