@@ -17,14 +17,6 @@ function Home({
   const [query, setQuery] = useState([])
   const [postss, setPostss] = useState([])
 
-
-  // console.log('Posts: ',posts)
-  // console.log('Postss: ',postss)
-  // console.log('Points: ',posts.map(e => e.points))
-  // console.log('Pointssss: ',postss.map(e => e.points))
-  // console.log('Points: ',posts.map(e => e.spoonacularScore))
-  // console.log('Pointssss: ',postss.map(e => e.spoonacularScore))
-
   useEffect(() => {
     dispatch(getAllDiets())
   }, [dispatch])
@@ -55,8 +47,10 @@ function Home({
     setPostss(posts.sort((a,b)=> a.points - b.points))
   }
   
-  function filterPosts() {
-    posts.sort()
+  function filterByDiet(e) {
+    let d = e.target.value
+    let newPosts = (d) => posts.filter(p => p.diets.includes(d.toLowerCase()))
+    setPostss(newPosts(d))
   }
 
   return (
@@ -76,10 +70,10 @@ function Home({
               <button type='submit'>Filtrar bro</button>
             </div>
 
-            <select name="diets" id="909" onChange={e => filterPosts(e)}>
+            <select name="diets" id="909" onChange={e => filterByDiet(e)}>
               <option defaultValue={true}>Filter by diet!</option>
               {diets.map(d => {
-                return <option key={d.id} value={d.id}>{d.name}</option>
+                return <option key={d.id} value={d.name}>{d.name}</option>
               })}
             </select>
 
@@ -89,8 +83,8 @@ function Home({
             </label>
 
             <label className='labelbro'>Order by punctuation
-              <button className='filterdownPoints' onClick={orderByPoints}/>
-              <button className='filterupPoints' onClick={orderByPointsRev}/>
+              <button className='filterdownPoints' onClick={orderByPoints}>.</button>
+              <button className='filterupPoints' onClick={orderByPointsRev}>.</button>
             </label>
 
             <Pagination
@@ -103,9 +97,7 @@ function Home({
 
         <br />
 
-        {/* <div className='bro'> */}
         <div className='bro'>
-          {/* <MealDisplay meal={query} onSearch={onSearch}/> */}
           <Posts posts={postss.length?postss:posts} loading={loading} handleDetails={handleDetails} />
         </div>
 

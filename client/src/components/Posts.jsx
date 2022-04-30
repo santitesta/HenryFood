@@ -17,7 +17,7 @@ const Posts = ({ posts, loading, handleDetails }) => {
             <NavLink className='navlinktitle' to="/details" onClick={e => handleDetails(e.target.title)}>
               <p className='title' title={r.id}>{r.title}</p>
             </NavLink>
-            <span className='spandiets'>{r.diets?.length?r.diets:'Not part of any diet'}</span>
+            <span className='spandiets'>{r.diets?.length?<p>{r.diets.join('-')}</p>:'Not part of any diet'}</span>
             <NavLink className='navlinkimg' to="/details" onClick={e => handleDetails(e.target.title)}>
               <img className="imgbro" src={r.image} alt={r.name} width="312" height="231" title={r.id}/>
             </NavLink>

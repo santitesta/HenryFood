@@ -4,19 +4,11 @@ export const GET_RECIPES = "GET_RECIPES"
 export const GET_RECIPE_ID = "GET_RECIPE_ID"
 export const GET_DIETS = "GET_DIETS"
 
-// export const getAllRecipes = () => {
-//     return function(dispatch){
-//         return axios.get("http://localhost:3001/recipe")
-//             .then(resp => dispatch({type: GET_RECIPES, payload: resp.data}))
-//             .catch(error => console.log(error))
-//     }
-// }
-
 export const getRecipes = (query) => {
     return function(dispatch){
         return axios.get(`http://localhost:3001/recipe`, {params: {query: query}})
             .then(resp => dispatch({type: GET_RECIPES, payload: resp.data}))
-            .catch(error => console.log(error))
+            .catch(error => alert('Error in getRecipes: ',error))
     }
 }
 

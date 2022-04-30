@@ -44,7 +44,9 @@ function App() {
 
   // Details id
   function handleDetails(title) {
+    setLoading(true)
     setId(title)
+    setLoading(false)
   }
 
   // Pagination

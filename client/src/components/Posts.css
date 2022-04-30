@@ -2,7 +2,6 @@
 .testito {
   width: 500px;
   height: 200px;
-  background-color: violet;
 }
 
 /* All the posts */
@@ -11,7 +10,5 @@
   height: 400px;
   display: flex;
   flex-direction: column;
-  /* flex-shrink: 3; */
   overflow: hidden;
-  background-color: aqua;
 }

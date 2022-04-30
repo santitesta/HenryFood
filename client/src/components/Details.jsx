@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getRecipeById } from '../redux/actions';
@@ -6,16 +6,27 @@ import './Details.css'
 
 function Details({id}) {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false)
+
   useEffect(() => {
-    dispatch(getRecipeById(id))
+    async function newIp() {
+      setLoading(true)
+      await dispatch(getRecipeById(id))
+      setLoading(false)
+    } 
+    newIp()
   },[dispatch])
 
   const recipe = useSelector(state => state.recipe)
 
-  if (!id) {
+  if(!id) {
     return <p>How did you get here? Please send review! Anyways, come again with a recipe to get details!</p>
   }
-  console.log(recipe)
+
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
+
   return (
     <>
       <NavLink to='/'>Return</NavLink>
@@ -31,7 +42,8 @@ function Details({id}) {
         <p>Health score: {recipe.healthScore}</p>
         <div className='steps'>
           {
-            !Object.keys(recipe).length?null:recipe.analyzedInstructions[0].steps.map(s => {
+            String(id).length > 7?<p>Steps for a database recipe</p>
+            :recipe.analyzedInstructions[0].steps.map(s => {
               return (<p key={s.number}>Step {s.number}: {s.step}</p>)
             })
           }

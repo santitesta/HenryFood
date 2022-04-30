@@ -2,24 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createRecipe, getAllDiets } from "../redux/actions"
 import './Create.css'
-
-function validate(input, item) {
-  let errors = {}
-  console.log(Number(input.points))
-
-  if(item === 'name') {
-    if(!input.name) errors.name = 'Must have a name'
-  }
-
-  if(item === 'points') {
-    // if(typeof(input.name) !== 'number' && input.value >= 0 && input.value <= 100) {
-    if(Number(input.points) < 0 || Number(input.points) > 100) {
-      errors.points = 'Must be a number between 0 and 100'
-    }
-  }
-
-  return errors
-}
+import { validate } from '../Misc/validate'
 
 function Create() {
   const dispatch = useDispatch();
@@ -35,31 +18,31 @@ function Create() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    // if(errors.name || errors.status) return alert('Wrong data!')
+    if(Object.keys(errors).length) {
+      return alert('The form is not completed right')
+    }
     let newRec = {...recipe, diet: dietrec.map(d => parseInt(d))}
+    console.log(newRec)
     dispatch(createRecipe(newRec))
+    document.getElementById('101').reset()
   }
 
   function handleChange(e) {
     let item = e.target.name
 
-    if(item === 'name') {
+    if(item === 'name' || item === 'points' || item === 'healthness') {
       setErrors(validate({...recipe, [item]:e.target.value }, item))
       setRecipe({...recipe, [item]:e.target.value})
-    }
-
-    if(item === 'points') {
-      setErrors(validate({...recipe, [item]:e.target.value }, item))
+    } else {
       setRecipe({...recipe, [item]:e.target.value})
     }
-
   }
 
   function handleDiets(e) {
     if(e.target.value == 0) return;
     if (!dietrec.includes(e.target.value)) {
       setDietrec([...dietrec, e.target.value])
-    } else return alert('This diet was already included')
+    }
   }
 
   function handleDelete(e) {
@@ -70,70 +53,91 @@ function Create() {
 
   return (
       <div className='condet'>
-        <form type="submit" className='form1'>
+        <form type="submit" className='form1' id='101'>
 
           <div className='minicont'>
-            <label className={errors.name?'nashe':null}>Name</label>
-            <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='name' placeholder='Name your recipe...' />
+            <div className='errorsadd'>
+              <label>Name</label>
+              <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='name' placeholder='Name your recipe...' />
+              {errors.name?<p className='errors'>{errors.name}</p>:<p/>}
+            </div>
           </div>
 
           <br />
 
           <div className='minicont'>
-            <label>Summary</label>
-            <input className='inputsc' onChange={e => handleChange(e)} name='summary' placeholder='Whats the deal?...'/>
+            <div className='errorsadd'>
+              <label>Summary</label>
+              <input className='summaryinp' onChange={e => handleChange(e)} type='text' name='summary' placeholder='Whats the deal?...'/>
+              {errors.summary?<p className='errors'>{errors.summary}</p>:<p/>}
+            </div>
           </div>
 
           <br />
 
           <div className='minicont'>
-            <label>Score</label>
-            <input className='inputsc' onChange={e => handleChange(e)} type="number" id='' name='points' placeholder='Score out of 100...' />
+            <div className='errorsadd'>
+              <label>Score</label>
+              <input className='inputsc' onChange={e => handleChange(e)} type="number" id='' name='points' placeholder='Score out of 100...' />
+              {errors.points?<p className='errors'>{errors.points}</p>:<p/>}
+            </div>
           </div>
 
           <div className='minicont'>
-            <label>Healthness</label>
-            <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='healthness' placeholder='Score out of 100...' />
+            <div className='errorsadd'>
+              <label>Healthness</label>
+              <input className='inputsc' onChange={e => handleChange(e)} type="number" id='' name='healthness' placeholder='Score out of 100...' />
+              {errors.healthness?<p className='errors'>{errors.healthness}</p>:<p/>}
+            </div>
           </div>
 
           <br />
           <div className='minicont'>
-            <label>Image</label>
-            <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='image' placeholder='Insert image as url...' />
+            <div className='errorsadd'>
+              <label>Image</label>
+              <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='image' placeholder='Insert image as url...' />
+              <p/>
+            </div>
           </div>
 
           <br />
 
           {
             !diets?null:<div className='minicont'>
-              <label>Diets</label>
-              <select className='listsc' name='diets' onChange={e => handleDiets(e)}>
-                <option defaultValue={true} value={0}>Choose your diet!</option>
-                {diets.map(d => {
-                  return <option key={d.id} value={d.id} className={dietrec.includes(`${d.id}`)?'dietchose':'dietunchose'}>
-                    {d.name}
-                  </option>
-                })}
-              </select>
-            </div>
-          }
-          {
-            !dietrec?null:<div className='minicont'>
-              {dietrec.map(d => {
-                return (<div key={d}>
-                  <span>{d}</span>
-                  <button value={d} onClick={e => handleDelete(e)}>X</button>
-                </div>)
-              })}
+              <div className='errorsadd'>
+                <label>Diets</label>
+                <select className='inputsc' name='diets' onChange={e => handleDiets(e)}>
+                  <option defaultValue={true} value={0}>Choose your diet!</option>
+                  {diets.map(d => {
+                    return <option key={d.id} value={d.id} className={dietrec.includes(`${d.id}`)?'dietchose':'dietunchose'}>
+                      {d.id}.{d.name}
+                    </option>
+                  })}
+                </select>
+                <p/>
+              </div>
             </div>
           }
 
           <div className='minicont'>
-            {Object.keys(errors).length?<h4>Fix those before creating: </h4>:<h4>Free to go</h4>}
+            <span>Steps</span>
           </div>
 
+          {
+            !dietrec.length?<div className='minicont'><div className='delete'><p>No diets chosen</p></div></div>:<div className='minicont'>
+              <div className='delete'>
+                {dietrec.map(d => {
+                  return (<div key={d}>
+                    <span>{d}</span>
+                    <button value={d} onClick={e => handleDelete(e)}>X</button>
+                  </div>)
+                })}
+              </div>
+            </div>
+          }
+
           <div className='minicont'>
-            <h4>{errors.name?errors.name:'Alright!'}</h4>
+            <textarea name="steps" id="" cols="40" rows="7" onChange={e => handleChange(e)}></textarea>
           </div>
 
           <button className='submitbutton' type="submit" onClick={e => handleSubmit(e)}>

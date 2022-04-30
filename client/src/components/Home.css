@@ -32,7 +32,6 @@
   align-items: center;
   height: 400px;
   justify-content: space-between;
-  background-color: green;
 }
 
 .inputquery {
@@ -74,7 +73,6 @@
   width: 1000px;
   height: 1600px;
   margin-left: 400px;
-  background-color: green;
 }
 
 /* .meal {

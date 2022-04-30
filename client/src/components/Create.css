@@ -1,11 +1,12 @@
 .condet {
-  width: 600px;
-  height: 450px;
+  width: 650;
+  height: 550px;
   margin-left: 50%;
   margin-top: 5%;
   transform: translateX(-50%);
   padding-bottom: 50px;
   background-image: url(https://thumbs.dreamstime.com/b/italian-food-ingredients-pasta-olive-oil-parmesan-cheese-basil-g-italian-food-ingredients-pasta-olive-oil-parmesan-cheese-basil-117926836.jpg);
+  background-size: cover;
   display: flex;
   flex-direction: column-reverse;
 }
@@ -17,23 +18,41 @@
 }
 
 .minicont{
-  width: 250px;
+  width: 325px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* background-color: red; */
   margin-left: 20px;
   margin-right: 20px;
   margin-top: 15px;
   font-family: 'Trebuchet MS';
 }
 
-.listsc {
-  width: 177px;
-  font-family: 'Trebuchet MS';
+.errorsadd {
+  width: 700px;
+  height: 35px;
 }
+
+.errors {
+  display: flex;
+  font-size: 11px;
+  color: crimson;
+  margin-top: 2px;
+}
+
 .inputsc {
   width: 170px;
+  margin-left: 85px;
+  border-radius: 10px;
+  border-width: 2;
+  border-color: darkorange;
+  font-family: 'Trebuchet MS';
+}
+
+.summaryinp {
+  width: 250px;
+  margin-left: 25px;
+  font-size: small;
   border-radius: 10px;
   border-width: 2;
   border-color: darkorange;
@@ -46,7 +65,7 @@
 
 .submitbutton{
   position: relative;
-  left: 25%;
+  left: 0%;
   top: 25px;
   width: 270px;
   height: 60px;
@@ -57,6 +76,10 @@
   color: green;
 }
 
-.nashe {
-  color: red;
+.delete {
+  display: flex;
+  height: 10px;
+  width: 300px;
+  margin-top: -60px;
+  font-size: small;
 }
