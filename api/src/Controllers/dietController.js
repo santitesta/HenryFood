@@ -35,7 +35,14 @@ apiDiets = [{
 },
 { id:11,
   name: 'Whole30'
-}]
+},
+{ id:12,
+  name: 'Dairy Free'
+},
+{ id:13,
+  name: 'Lacto ovo vegetarian'
+},
+]
 
 async function getDiets(req,res){
   let diets = await Diets.findAll()
@@ -46,8 +53,8 @@ async function createDiet(req,res,next){
   try {
     const {name} = req.body
     return Diets.create({name})
-      .then(console.log('Diet loaded!'))
-      .then(res.send('Diet loaded!'))
+      .then(console.log('Diet created!'))
+      .then(res.send('Diet created!'))
   } catch (error) {
     next(error)
   }
@@ -55,8 +62,8 @@ async function createDiet(req,res,next){
 
 async function chargeDiets(req,res){
   return Diets.bulkCreate(apiDiets)
-  .then(response => console.log('API Diets loaded'))
-  .catch(error => console.log(error))
+    .then(response => console.log('API Diets loaded'))
+    .catch(error => console.log(error))
 }
 
 module.exports = {
