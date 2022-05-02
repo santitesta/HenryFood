@@ -34,7 +34,7 @@ function Details({id}) {
       !Object.keys(recipe).length?<h1>Loading...</h1>
       :<div className='container'>
         <h1>Those are the details of {recipe.name}!</h1>
-        <img src={recipe.image} alt={`${recipe.name} not found`} />
+        <img src={recipe.image} alt={`${recipe.name} image not found`} />
         <p>Dish types: {recipe.dishTypes}</p>
         <p>Diets: {recipe.diets?recipe.diets:'Not part of any diet registered'}</p>
         <p>Summary: {recipe.summary}</p>
@@ -42,7 +42,7 @@ function Details({id}) {
         <p>Health score: {recipe.healthScore}</p>
         <div className='steps'>
           {
-            String(id).length > 7?<p>Steps for a database recipe</p>
+            String(id).length > 7?<p>Steps for a database recipe: {recipe.steps}</p>
             :recipe.analyzedInstructions[0].steps.map(s => {
               return (<p key={s.number}>Step {s.number}: {s.step}</p>)
             })

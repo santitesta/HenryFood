@@ -2,13 +2,80 @@
 .testito {
   width: 500px;
   height: 200px;
+  margin-left: 450px;
+  margin-top: 20px;
 }
 
 /* All the posts */
-.meal {
-  width: 400px;
-  height: 400px;
+.postscont1 {
+  column-count: 1;
+  width: 1000px;
+  height: 2300px;
+  margin-left: 400px;
+  justify-content: space-between;
+  background-color: red;
+}
+.postscont2 {
+  column-count: 2;
+  width: 800px;
+  height: 1000px;
+  margin-left: 400px;
+  justify-content: space-between;
+  background-color: aqua;
+}
+.postscont3 {
+  column-count: 3;
+  width: 1000px;
+  height: 1000px;
+  margin-left: 400px;
+  justify-content: space-between;
+  background-color: blue;
+}
+
+.post {
+  width: 300px;
+  height: 280px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: solid 2px black;
+  margin-bottom: 10px;
   overflow: hidden;
+  backdrop-filter: brightness(40%);
+}
+
+.navlinktitle {
+  text-decoration: none;
+  height: 50px;
+}
+
+.postTitle {
+  margin: 0 auto;
+  padding: 0px 15px;
+  width: 250px;
+  height: 50px;
+  background-color: gold;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.spandiets {
+  background-color: darkgoldenrod;
+  width: 250px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.navlinkimg {
+
+}
+
+.postImg {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
 }

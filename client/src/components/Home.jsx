@@ -62,7 +62,7 @@ function Home({
         <form id='myForm' className='filters' onSubmit={e => handleSubmit(e)}><label className='filtertitle'>Filter your meal</label> <br />
           <div className='columnsfil'>
             <div>
-              <input className='inputquery' type="text"
+              <input data-testid='search-button' className='inputquery' type="text"
                 id="505"
                 placeholder='Name...' 
                 value={query} 
@@ -95,11 +95,9 @@ function Home({
           </div>
         </form>
 
-        <br />
+        <br style={{backgroundColor: 'blue'}} />
 
-        <div className='bro'>
-          <Posts posts={postss.length?postss:posts} loading={loading} handleDetails={handleDetails} />
-        </div>
+        <Posts posts={postss.length?postss:posts} loading={loading} handleDetails={handleDetails} />
 
       </>
   );
