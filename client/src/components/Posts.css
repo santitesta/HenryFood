@@ -12,24 +12,21 @@
   width: 1000px;
   height: 2300px;
   margin-left: 400px;
-  justify-content: space-between;
-  background-color: red;
+  justify-content: space-evenly;
 }
 .postscont2 {
   column-count: 2;
   width: 800px;
   height: 1000px;
   margin-left: 400px;
-  justify-content: space-between;
-  background-color: aqua;
+  justify-content: space-evenly;
 }
 .postscont3 {
   column-count: 3;
   width: 1000px;
   height: 1000px;
   margin-left: 400px;
-  justify-content: space-between;
-  background-color: blue;
+  justify-content: space-evenly;
 }
 
 .post {
@@ -37,21 +34,23 @@
   height: 280px;
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
   border: solid 2px black;
   margin-bottom: 10px;
   overflow: hidden;
-  backdrop-filter: brightness(40%);
+  background-color: coral;
 }
 
 .navlinktitle {
   text-decoration: none;
+  /* width: 250px; */
   height: 50px;
 }
 
 .postTitle {
-  margin: 0 auto;
+  margin: 0;
   padding: 0px 15px;
   width: 250px;
   height: 50px;
@@ -61,21 +60,29 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-.spandiets {
+.postDiets {
   background-color: darkgoldenrod;
   width: 250px;
+  height: 50px;
   padding: 0 15px;
-  margin: 0 auto;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .navlinkimg {
-
+  background-color: brown;
+  height: 160px;
 }
 
 .postImg {
   width: 180px;
-  height: 180px;
+  height: 160px;
   object-fit: cover;
+  border: solid 1px black;
 }

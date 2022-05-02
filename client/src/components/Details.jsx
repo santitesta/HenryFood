@@ -7,14 +7,14 @@ import './Details.css'
 function Details({id}) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false)
-
+  
   useEffect(() => {
-    async function newIp() {
+    async function newIp(id) {
       setLoading(true)
       await dispatch(getRecipeById(id))
       setLoading(false)
     } 
-    newIp()
+    newIp(id)
   },[dispatch])
 
   const recipe = useSelector(state => state.recipe)
@@ -34,7 +34,7 @@ function Details({id}) {
       !Object.keys(recipe).length?<h1>Loading...</h1>
       :<div className='container'>
         <h1>Those are the details of {recipe.name}!</h1>
-        <img src={recipe.image} alt={`${recipe.name} image not found`} />
+        <img src={recipe.image} alt={`${recipe.name} not found`} />
         <p>Dish types: {recipe.dishTypes}</p>
         <p>Diets: {recipe.diets?recipe.diets:'Not part of any diet registered'}</p>
         <p>Summary: {recipe.summary}</p>

@@ -2,24 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDiets } from "../redux/actions"
 
+import Posts from './Posts';
 import './Home.css'
 
-import Pagination from './Pagination';
-import Posts from './Posts';
-
 function Home({
-  meal, handleDetails, onSearch,
+  allPosts, handleDetails, onSearch,
   posts, loading,
-  postsPerPage,totalPosts,paginate
+  currentPage, postsPerPage,paginate
 }) {
   const dispatch = useDispatch();
   const diets = useSelector(state => state.diets)
   const [query, setQuery] = useState([])
-  const [postss, setPostss] = useState([])
+  const [filtPosts, setFiltPosts] = useState([])
 
   useEffect(() => {
     dispatch(getAllDiets())
   }, [dispatch])
+
+  useEffect(() => {
+    setFiltPosts([])
+  }, [allPosts])
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -30,27 +32,27 @@ function Home({
   }
 
   function orderAlph() {
-    setPostss(posts.sort((a,b) => (a.title.toLowerCase() < b.title.toLowerCase()) ? 1 : -1))
+    setFiltPosts(posts.sort((a,b) => (a.title.toLowerCase() < b.title.toLowerCase()) ? 1 : -1))
   }
 
   function orderAlphRev() {
-    setPostss(posts.sort((a,b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1 : -1))
+    setFiltPosts(posts.sort((a,b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1 : -1))
   }
 
   function orderByPoints() {
-    // setPostss(posts.sort((a,b)=> a.spoonacularScore - b.spoonacularScore).reverse())
-    setPostss(posts.sort((a,b)=> a.points - b.points).reverse())
+    // setFiltPosts(posts.sort((a,b)=> a.spoonacularScore - b.spoonacularScore).reverse())
+    setFiltPosts(posts.sort((a,b)=> a.points - b.points).reverse())
   }
-  
+
   function orderByPointsRev() {
-    // setPostss(posts.sort((a,b)=> a.spoonacularScore - b.spoonacularScore))
-    setPostss(posts.sort((a,b)=> a.points - b.points))
+    // setFiltPosts(posts.sort((a,b)=> a.spoonacularScore - b.spoonacularScore))
+    setFiltPosts(posts.sort((a,b)=> a.points - b.points))
   }
-  
+
   function filterByDiet(e) {
     let d = e.target.value
-    let newPosts = (d) => posts.filter(p => p.diets.includes(d.toLowerCase()))
-    setPostss(newPosts(d))
+    let newPosts = d => allPosts.filter(p => p.diets.includes(d.toLowerCase()))
+    setFiltPosts(newPosts(d))
   }
 
   return (
@@ -59,7 +61,7 @@ function Home({
           <h1 className='home'>Welcome to Henry Foods PI</h1>
         </div>
 
-        <form id='myForm' className='filters' onSubmit={e => handleSubmit(e)}><label className='filtertitle'>Filter your meal</label> <br />
+        <div id='myForm' className='filters' onSubmit={e => handleSubmit(e)}><label className='filtertitle'>Filter your meal</label> <br />
           <div className='columnsfil'>
             <div>
               <input data-testid='search-button' className='inputquery' type="text"
@@ -67,7 +69,7 @@ function Home({
                 placeholder='Name...' 
                 value={query} 
                 onChange={e => setQuery(e.target.value)}/>
-              <button type='submit'>Filtrar bro</button>
+              <button onClick={e => handleSubmit(e)}>Filtrar bro</button>
             </div>
 
             <select name="diets" id="909" onChange={e => filterByDiet(e)}>
@@ -87,17 +89,16 @@ function Home({
               <button className='filterupPoints' onClick={orderByPointsRev}>.</button>
             </label>
 
-            <Pagination
-              postsPerPage={postsPerPage}
-              totalPosts={totalPosts}
-              paginate={paginate}
-            />
           </div>
-        </form>
+        </div>
 
         <br style={{backgroundColor: 'blue'}} />
 
-        <Posts posts={postss.length?postss:posts} loading={loading} handleDetails={handleDetails} />
+        <Posts posts={filtPosts.length?filtPosts:posts} loading={loading} handleDetails={handleDetails}
+          currentPage={currentPage}
+          postsPerPage={postsPerPage}
+          paginate={paginate}
+        />
 
       </>
   );

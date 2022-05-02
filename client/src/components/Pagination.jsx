@@ -1,19 +1,19 @@
 import React from 'react';
 import './Pagination.css'
 
-const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
+const Pagination = ({ posts, postsPerPage, paginate, currentPage }) => {
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(posts / postsPerPage); i++) {
     pageNumbers.push(i);
-  }
+  }  
 
   return (
     <nav className='paginationnav'>
-      Navigation
+      Pagination
       <div className='ulnav'>
         {pageNumbers.map(number => (
-          <button key={number} onClick={() => paginate(number)}>
+          <button key={number} className={currentPage==number?'activePage':null} onClick={() => paginate(number)}>
               {number}
           </button>
         ))}
