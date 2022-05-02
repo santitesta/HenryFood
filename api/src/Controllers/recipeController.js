@@ -6,6 +6,7 @@ const { apiKey } = process.env;
 const URLid = "https://api.spoonacular.com/recipes/"
 const URLcs = `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&apiKey=${apiKey}`
 
+// Downloaded 100 results from API and stored it
 const fs = require('fs');
 let jsonData = JSON.parse(fs.readFileSync('spoonacular.json', 'utf-8'))
 
@@ -27,8 +28,8 @@ async function getRecipe(req,res){
     })
     
     let recipesDB = await Recipes.findAll()
-    let recipesfound = recipesDB.filter(r => r.name === query)
-    console.log(recipesfound)
+    // let recipesfound = recipesDB.filter(r => r.name === query)
+    let recipesfound = recipesDB.filter(r => r.name === query).slice(0,90)
     if(recipesfound.length) {
       let allRecipes = recipesfound.concat(recipesAPI)
       return res.send(allRecipes)
@@ -37,9 +38,6 @@ async function getRecipe(req,res){
       return res.send(allRecipes)
     }
 
-    // let allRecipes = (await Recipes.findAll()).concat(recipes)
-
-    res.send(allRecipes)
   } catch (error) {
     console.log(error)
   }
@@ -53,7 +51,6 @@ async function getRecipeById(req,res){
         id: id
       }
     })
-    // console.log('Recipe db: ',recipedb)
     res.send(recipedb)
   } else {
     await axios.get(`${URLid}${id}/information?apiKey=${apiKey}`)
