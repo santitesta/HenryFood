@@ -28,8 +28,12 @@ async function getRecipe(req,res){
     })
     
     let recipesDB = await Recipes.findAll()
-    // let recipesfound = recipesDB.filter(r => r.name === query)
     let recipesfound = recipesDB.filter(r => r.name === query).slice(0,90)
+
+
+    if(!recipesfound.length && !recipesAPI.length) {
+      return res.send(['empty'])
+    }
     if(recipesfound.length) {
       let allRecipes = recipesfound.concat(recipesAPI)
       return res.send(allRecipes)
@@ -45,6 +49,7 @@ async function getRecipe(req,res){
 
 async function getRecipeById(req,res){
   const {id} = req.params;
+  
   if(String(id).length > 7) {
     let recipedb = await Recipes.findOne({
       where: {
