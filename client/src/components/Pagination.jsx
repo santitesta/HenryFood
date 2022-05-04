@@ -7,7 +7,7 @@ const Pagination = ({ currentPosts, allPosts, postsPerPage, paginate, currentPag
   for (let i = 1; i <= Math.ceil(allPosts.length / postsPerPage); i++) {
     pageNumbers.push(i);
   } 
-  console.log(pageNumbers)
+  
   return (
     <nav className='paginationnav'>
       Pagination

@@ -13,15 +13,18 @@
   width: 80%;
 }
 .banner {
-  background-color: greenyellow;
+  width: auto;
+  margin-left: 5%;
+  height: 300px;
+  background-image: url(https://image.shutterstock.com/image-photo/table-food-top-view-600w-467823860.jpg);
+  background-size: cover;
 }
 
 /* Filters */
 .filters {
   width: 15%;
   height: 100%;
-  /* position: fixed; */
-  background-color: blanchedalmond;
+  background-color: snow;
   border: solid 1px black;
 }
 
@@ -52,6 +55,7 @@
 
 .labelbro{
   color: black;
+  font-size: smaller;
 }
 
 .filterupAlph {

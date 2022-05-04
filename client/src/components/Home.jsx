@@ -4,6 +4,7 @@ import { getAllDiets } from "../redux/actions"
 
 import Posts from './Posts';
 import './Home.css'
+import { personalSorts } from '../Misc/sort'
 
 function Home({
   currentPosts, allPosts, 
@@ -12,6 +13,7 @@ function Home({
 }) {
   const dispatch = useDispatch();
   const diets = useSelector(state => state.diets)
+
   const [query, setQuery] = useState([])
   const [filtPosts, setFiltPosts] = useState([])
 
@@ -31,28 +33,24 @@ function Home({
     }
   }
 
-  function orderAlph() {
-    setFiltPosts(currentPosts.sort((a,b) => (a.title.toLowerCase() < b.title.toLowerCase()) ? 1 : -1))
-  }
-
-  function orderAlphRev() {
-    setFiltPosts(currentPosts.sort((a,b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1 : -1))
-  }
-
-  function orderByPoints() {
-    // setFiltPosts(posts.sort((a,b)=> a.spoonacularScore - b.spoonacularScore).reverse())
-    setFiltPosts(currentPosts.sort((a,b)=> a.points - b.points).reverse())
-  }
-
-  function orderByPointsRev() {
-    // setFiltPosts(posts.sort((a,b)=> a.spoonacularScore - b.spoonacularScore))
-    setFiltPosts(currentPosts.sort((a,b)=> a.points - b.points))
-  }
-
-  function filterByDiet(e) {
-    let d = e.target.value
-    let newPosts = d => allPosts.filter(p => p.diets.includes(d.toLowerCase()))
-    setFiltPosts(newPosts(d))
+  function handleFilter(e) {
+    switch (e.target.name) {
+      case 'alph':
+        setFiltPosts(personalSorts.orderAlph(currentPosts))
+        break;
+      case 'alphrev':
+        setFiltPosts(personalSorts.orderAlphRev(currentPosts))
+        break;
+      case 'points':
+        setFiltPosts(personalSorts.orderByPoints(currentPosts))
+        break;
+      case 'pointsrev':
+        setFiltPosts(personalSorts.orderByPointsRev(currentPosts))
+        break;
+      case 'diets':
+        setFiltPosts(personalSorts.filterByDiet(currentPosts,e.target.value))
+        break;
+    }
   }
 
   return (
@@ -71,7 +69,7 @@ function Home({
               <button className='querybtn' onClick={e => handleSubmit(e)}>.</button>
             </div>
 
-            <select name="diets" id="909" onChange={e => filterByDiet(e)}>
+            <select name="diets" id="909" onChange={e => handleFilter(e)}>
               <option defaultValue={true}>Filter by diet!</option>
               {diets.map(d => {
                 return <option key={d.id} value={d.name}>{d.name}</option>
@@ -79,13 +77,13 @@ function Home({
             </select>
 
             <label className='labelbro'>Order alphabetically
-              <button className='filterdownAlph' onClick={orderAlphRev}>A-Z</button>
-              <button className='filterupAlph' onClick={orderAlph}>Z-A</button>
+              <button name='alph' className='filterdownAlph' onClick={e => handleFilter(e)}>A-Z</button>
+              <button name='alphrev' className='filterupAlph' onClick={e => handleFilter(e)}>Z-A</button>
             </label>
 
             <label className='labelbro'>Order by punctuation
-              <button className='filterdownPoints' onClick={orderByPoints}>.</button>
-              <button className='filterupPoints' onClick={orderByPointsRev}>.</button>
+              <button name='points' className='filterdownPoints' onClick={e => handleFilter(e)}>.</button>
+              <button name='pointsrev' className='filterupPoints' onClick={e => handleFilter(e)}>.</button>
             </label>
 
           </div>
