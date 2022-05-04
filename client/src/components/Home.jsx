@@ -56,10 +56,7 @@ function Home({
   }
 
   return (
-      <>
-        <div>
-          <h1 className='home'>Welcome to Henry Foods PI</h1>
-        </div>
+      <div className='mainhome'>
 
         <div id='myForm' className='filters' onSubmit={e => handleSubmit(e)}>
           <label className='filtertitle'>Filter your meal</label> 
@@ -71,7 +68,7 @@ function Home({
                 placeholder='Name...' 
                 value={query} 
                 onChange={e => setQuery(e.target.value)}/>
-              <button onClick={e => handleSubmit(e)}>Filtrar bro</button>
+              <button className='querybtn' onClick={e => handleSubmit(e)}>.</button>
             </div>
 
             <select name="diets" id="909" onChange={e => filterByDiet(e)}>
@@ -94,17 +91,19 @@ function Home({
           </div>
         </div>
 
-        <br style={{backgroundColor: 'blue'}} />
+        <div className='derecha'>
+          <div className='banner'>aber</div>
 
-        <Posts currentPosts={filtPosts.length?filtPosts:currentPosts}
-          allPosts={allPosts}
-          loading={loading} handleDetails={handleDetails}
-          currentPage={currentPage}
-          postsPerPage={postsPerPage}
-          paginate={paginate}
-        />
+          <Posts currentPosts={filtPosts.length?filtPosts:currentPosts}
+            allPosts={allPosts}
+            loading={loading} handleDetails={handleDetails}
+            currentPage={currentPage}
+            postsPerPage={postsPerPage}
+            paginate={paginate}
+          />
+        </div>
 
-      </>
+      </div>
   );
 };
   

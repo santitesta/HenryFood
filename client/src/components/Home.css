@@ -1,29 +1,33 @@
 :root {
   --backsize: cover;
-  --wh: 40px;
-  --hh: 40px;
+  --wh: 25px;
+  --hh: 25px;
 }
 
-.hometitle {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
+.mainhome {
+  display: flex;
+  margin-top: -6px;
+}
+
+.derecha {
+  width: 80%;
+}
+.banner {
+  background-color: greenyellow;
 }
 
 /* Filters */
 .filters {
-  width: 220px;
+  width: 15%;
   height: 100%;
-  position: fixed;
-  /* margin-top: 55px; */
-  /* margin-left: 40px; */
-  backdrop-filter: brightness(60%);
+  /* position: fixed; */
+  background-color: blanchedalmond;
   border: solid 1px black;
 }
 
 .filtertitle {
-  font-size: 40px;
-  color: antiquewhite;
+  font-size: 20px;
+  color: black;
 }
 
 .columnsfil {
@@ -35,22 +39,31 @@
 }
 
 .inputquery {
-  width: 200px;
+  width: 100px;
   margin-top: 20px;
 }
 
+.querybtn {
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQma2cYiuplKN08wKGL6EV1bLGrLzpcqyQZQg&usqp=CAU);
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+}
+
 .labelbro{
-  color: antiquewhite;
+  color: black;
 }
 
 .filterupAlph {
-  width: var(--wh);
+  width: var(--wh+5);
   height: var(--hh);
+  font-size: smaller;
 }
 
 .filterdownAlph {
-  width: var(--wh);
+  width: var(--wh+5);
   height: var(--hh);
+  font-size: smaller;
 }
 
 .filterupPoints {
