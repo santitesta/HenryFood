@@ -11,9 +11,6 @@ function Nav() {
             <NavLink className='b' to='/create'>
               Create your recipe!
             </NavLink>
-            <NavLink className='b' to='/mealdisplay'>
-              Meal searching
-            </NavLink>
         </nav>
     );
   };

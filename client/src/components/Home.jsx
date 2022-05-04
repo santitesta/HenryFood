@@ -6,8 +6,8 @@ import Posts from './Posts';
 import './Home.css'
 
 function Home({
-  allPosts, handleDetails, onSearch,
-  posts, loading,
+  currentPosts, allPosts, 
+  handleDetails, onSearch, loading,
   currentPage, postsPerPage,paginate
 }) {
   const dispatch = useDispatch();
@@ -32,21 +32,21 @@ function Home({
   }
 
   function orderAlph() {
-    setFiltPosts(posts.sort((a,b) => (a.title.toLowerCase() < b.title.toLowerCase()) ? 1 : -1))
+    setFiltPosts(currentPosts.sort((a,b) => (a.title.toLowerCase() < b.title.toLowerCase()) ? 1 : -1))
   }
 
   function orderAlphRev() {
-    setFiltPosts(posts.sort((a,b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1 : -1))
+    setFiltPosts(currentPosts.sort((a,b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1 : -1))
   }
 
   function orderByPoints() {
     // setFiltPosts(posts.sort((a,b)=> a.spoonacularScore - b.spoonacularScore).reverse())
-    setFiltPosts(posts.sort((a,b)=> a.points - b.points).reverse())
+    setFiltPosts(currentPosts.sort((a,b)=> a.points - b.points).reverse())
   }
 
   function orderByPointsRev() {
     // setFiltPosts(posts.sort((a,b)=> a.spoonacularScore - b.spoonacularScore))
-    setFiltPosts(posts.sort((a,b)=> a.points - b.points))
+    setFiltPosts(currentPosts.sort((a,b)=> a.points - b.points))
   }
 
   function filterByDiet(e) {
@@ -61,7 +61,9 @@ function Home({
           <h1 className='home'>Welcome to Henry Foods PI</h1>
         </div>
 
-        <div id='myForm' className='filters' onSubmit={e => handleSubmit(e)}><label className='filtertitle'>Filter your meal</label> <br />
+        <div id='myForm' className='filters' onSubmit={e => handleSubmit(e)}>
+          <label className='filtertitle'>Filter your meal</label> 
+
           <div className='columnsfil'>
             <div>
               <input data-testid='search-button' className='inputquery' type="text"
@@ -94,7 +96,9 @@ function Home({
 
         <br style={{backgroundColor: 'blue'}} />
 
-        <Posts posts={filtPosts.length?filtPosts:posts} loading={loading} handleDetails={handleDetails}
+        <Posts currentPosts={filtPosts.length?filtPosts:currentPosts}
+          allPosts={allPosts}
+          loading={loading} handleDetails={handleDetails}
           currentPage={currentPage}
           postsPerPage={postsPerPage}
           paginate={paginate}

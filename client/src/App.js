@@ -43,10 +43,10 @@ function App() {
     setMeal(recipes)
   }, [recipes] )
 
-  useEffect(() => {
-    setCurrentPage(1)
-    currentPosts = meal.slice(indexOfFirstPost, indexOfLastPost)
-  },[meal])
+  // useEffect(() => {
+  //   setCurrentPage(1)
+  //   currentPosts = meal.slice(indexOfFirstPost, indexOfLastPost)
+  // },[meal])
   // * Store> *
 
   // Find recipes by name
@@ -70,7 +70,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home 
         onSearch={onSearch} handleDetails={handleDetails} 
-        allPosts={meal} posts={currentPosts} loading={loading} 
+        allPosts={meal} currentPosts={currentPosts} loading={loading} 
         currentPage={currentPage} postsPerPage={postsPerPage} paginate={paginate}
         />}/>
         <Route path="/create" element={<Create />}/>

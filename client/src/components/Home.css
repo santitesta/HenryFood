@@ -12,11 +12,11 @@
 
 /* Filters */
 .filters {
-  width: 330px;
-  height: 500px;
+  width: 220px;
+  height: 100%;
   position: fixed;
-  margin-top: 55px;
-  margin-left: 40px;
+  /* margin-top: 55px; */
+  /* margin-left: 40px; */
   backdrop-filter: brightness(60%);
   border: solid 1px black;
 }

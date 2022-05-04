@@ -4,23 +4,23 @@ import './Posts.css'
 
 import Pagination from './Pagination';
 
-const Posts = ({ posts, loading, handleDetails, currentPage, postsPerPage, paginate }) => {
+const Posts = ({ currentPosts, allPosts, loading, handleDetails, currentPage, postsPerPage, paginate }) => {
   //Returns of incomplete searchs
   if (loading) return <h2>Loading...</h2>;
-  if(!posts.length) return <h1 className='testito'>Look after a meal! They will display here</h1>
+  if(!currentPosts.length) return <h1 className='testito'>Look after a meal! They will display here</h1>
 
   // Different quantity of columns depending on post quantities. TBD: Set CSS property 'ColumnCount'
   let contClass = 'postscont3'
-  if(posts.lenght <= 3 || posts.length == 5 || posts.length ==7) {
+  if(currentPosts.lenght <= 3 || currentPosts.length == 5 || currentPosts.length ==7) {
     contClass = 'postscont1'
-  } else if(posts.length == 4 || posts.length == 8) {
+  } else if(currentPosts.length == 4 || currentPosts.length == 8) {
     contClass = 'postscont2'
   }
 
   return (
     <>
       <div className={contClass}>
-        {posts.map(r => {
+        {currentPosts.map(r => {
           return(
             <div key={r.id} className='post'>
               <NavLink className='navlinktitle' to="/details" onClick={e => handleDetails(e.target.title || e.target.name)}>
@@ -34,7 +34,8 @@ const Posts = ({ posts, loading, handleDetails, currentPage, postsPerPage, pagin
         )})}
       </div>
       <Pagination
-        posts={posts}
+        currentPosts={currentPosts}
+        allPosts={allPosts}
         currentPage={currentPage}
         postsPerPage={postsPerPage}
         paginate={paginate}
