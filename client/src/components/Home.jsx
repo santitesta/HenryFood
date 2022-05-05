@@ -57,7 +57,7 @@ function Home({
       <div className='mainhome'>
 
         <div id='myForm' className='filters' onSubmit={e => handleSubmit(e)}>
-          <label className='filtertitle'>Filter your meal</label> 
+          <label className='filtertitle'>Filters</label> 
 
           <div className='columnsfil'>
             <div>
@@ -77,17 +77,23 @@ function Home({
             </select>
 
             <label className='labelbro'>Order alphabetically
-              <button name='alph' className='filterdownAlph' onClick={e => handleFilter(e)}>A-Z</button>
-              <button name='alphrev' className='filterupAlph' onClick={e => handleFilter(e)}>Z-A</button>
+              <div className='filtbn'>
+                <button name='alph' className='filterdownAlph' onClick={e => handleFilter(e)}>A-Z</button>
+                <button name='alphrev' className='filterupAlph' onClick={e => handleFilter(e)}>Z-A</button>
+              </div>
             </label>
 
             <label className='labelbro'>Order by punctuation
-              <button name='points' className='filterdownPoints' onClick={e => handleFilter(e)}>.</button>
-              <button name='pointsrev' className='filterupPoints' onClick={e => handleFilter(e)}>.</button>
+              <div className='filtbn'>
+                <button name='points' className='filterdownPoints' onClick={e => handleFilter(e)}>.</button>
+                <button name='pointsrev' className='filterupPoints' onClick={e => handleFilter(e)}>.</button>
+              </div>
             </label>
 
           </div>
         </div>
+
+        <vl/>
 
         <div className='derecha'>
           <div className='banner'>aber</div>

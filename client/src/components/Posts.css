@@ -2,8 +2,8 @@
 .testito {
   width: 500px;
   height: 200px;
-  margin-left: 450px;
-  margin-top: 20px;
+  margin-left: 150px;
+  margin-top: 120px;
 }
 
 /* All the posts */
@@ -11,21 +11,24 @@
   column-count: 1;
   width: 1000px;
   height: 2300px;
-  margin-left: 100px;
+  margin-left: 40px;
+  margin-top: 100px;
   justify-content: space-evenly;
 }
 .postscont2 {
   column-count: 2;
   width: 800px;
   height: 1000px;
-  margin-left: 100px;
+  margin-left: 40px;
+  margin-top: 100px;
   justify-content: space-evenly;
 }
 .postscont3 {
   column-count: 3;
   width: 1000px;
   height: 1000px;
-  margin-left: 100px;
+  margin-left: 40px;
+  margin-top: 100px;
   justify-content: space-evenly;
 }
 
@@ -40,7 +43,7 @@
   border: solid 2px black;
   margin-bottom: 10px;
   overflow: hidden;
-  background-color: coral;
+  background-color: aquamarine;
 }
 
 .navlinktitle {
@@ -54,7 +57,6 @@
   padding: 0px 15px;
   width: 250px;
   height: 50px;
-  background-color: gold;
   color: black;
   display: flex;
   flex-direction: row;
@@ -65,7 +67,6 @@
 }
 
 .postDiets {
-  background-color: darkgoldenrod;
   width: 250px;
   height: 50px;
   padding: 0 15px;
@@ -78,7 +79,6 @@
 }
 
 .navlinkimg {
-  background-color: brown;
   height: 160px;
 }
 

@@ -7,7 +7,7 @@ import Pagination from './Pagination';
 const Posts = ({ currentPosts, allPosts, loading, handleDetails, currentPage, postsPerPage, paginate }) => {
   //Returns of incomplete searchs
   if (loading) return <h2>Loading...</h2>;
-  if(!currentPosts.length) return <h1 className='testito'>Look after a meal! They will display here</h1>
+  if(!currentPosts.length) return <h1 className='testito'>Look after a meal! They will be displayed here</h1>
 
   // Different quantity of columns depending on post quantities. TBD: Set CSS property 'ColumnCount'
   let contClass = 'postscont3'
@@ -29,7 +29,7 @@ const Posts = ({ currentPosts, allPosts, loading, handleDetails, currentPage, po
               <NavLink className='navlinkimg' to="/details" onClick={e => handleDetails(e.target.title)}>
                 <img className='postImg' src={r.image} alt={r.name} title={r.id}/>
               </NavLink>
-              <span className='postDiets'>{r.diets?.length?<p>{r.diets.join('-')}</p>:<p>Not part of any diet</p>}</span>
+              <span className='postDiets'>{r.diets?.length?<p>Diets: {r.diets.join('-')}</p>:<p>Diets: none</p>}</span>
             </div>
         )})}
       </div>
