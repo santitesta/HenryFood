@@ -1,8 +1,13 @@
 
 
+//Remind a === a.reverse() so gotta make a new array in order to make a state change and re render
 export const personalSorts = {
   orderAlph: function(posts) {
-    return posts.sort((a,b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1 : -1)
+    let arr1 = []
+    posts.forEach(element => {
+      arr1.push(element)
+    });
+    return arr1.sort((a,b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1 : -1)
   },
   orderAlphRev: function(posts) {
     return posts.sort((a,b) => (a.title.toLowerCase() < b.title.toLowerCase()) ? 1 : -1)

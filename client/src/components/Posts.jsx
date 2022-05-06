@@ -21,6 +21,7 @@ const Posts = ({
     contClass = 'postscont2'
   }
 
+  console.log('Posts render')
   return (
     <>
       <div className={contClass}>
