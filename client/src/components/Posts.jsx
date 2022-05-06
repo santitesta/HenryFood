@@ -4,7 +4,11 @@ import './Posts.css'
 
 import Pagination from './Pagination';
 
-const Posts = ({ currentPosts, allPosts, loading, handleDetails, currentPage, postsPerPage, paginate }) => {
+const Posts = ({
+  handleDetails,
+  allPosts, currentPosts, loading,
+  currentPage, postsPerPage, paginate
+}) => {
   //Returns of incomplete searchs
   if (loading) return <h2>Loading...</h2>;
   if(!currentPosts.length) return <h1 className='testito'>Look after a meal! They will be displayed here</h1>
@@ -34,7 +38,6 @@ const Posts = ({ currentPosts, allPosts, loading, handleDetails, currentPage, po
         )})}
       </div>
       <Pagination
-        currentPosts={currentPosts}
         allPosts={allPosts}
         currentPage={currentPage}
         postsPerPage={postsPerPage}

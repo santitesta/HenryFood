@@ -15,7 +15,7 @@ function Details({id}) {
       setLoading(false)
     } 
     newIp(id)
-  },[dispatch])
+  },[dispatch,id])
 
   const recipe = useSelector(state => state.recipe)
 

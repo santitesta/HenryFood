@@ -14,22 +14,9 @@ function App() {
   let dispatch = useDispatch()
   const [meal, setMeal] = useState([]);
   const [id, setId] = useState()
+  let [loading, setLoading] = useState(false);
   
   const recipes = useSelector(state => state.recipes)
-
-    // Pagination
-  // const [posts, setPosts] = useState([]);
-  let [loading, setLoading] = useState(false);
-  let [currentPage, setCurrentPage] = useState(1);
-  let [postsPerPage] = useState(9);
-
-  // Get current posts
-  let indexOfLastPost = currentPage * postsPerPage;
-  let indexOfFirstPost = indexOfLastPost - postsPerPage;
-  let currentPosts = meal.slice(indexOfFirstPost, indexOfLastPost);
-
-  // Change page
-  const paginate = pageNumber => setCurrentPage(pageNumber);
   
   // This is for future improvements, like creating diets
   useEffect(() => {
@@ -43,10 +30,6 @@ function App() {
     setMeal(recipes)
   }, [recipes] )
 
-  // useEffect(() => {
-  //   setCurrentPage(1)
-  //   currentPosts = meal.slice(indexOfFirstPost, indexOfLastPost)
-  // },[meal])
   // * Store> *
 
   // Find recipes by name
@@ -58,7 +41,6 @@ function App() {
 
   // Details id
   function handleDetails(title) {
-    console.log('Inside handleDetails: ',title)
     setLoading(true)
     setId(title)
     setLoading(false)
@@ -70,9 +52,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Home 
         onSearch={onSearch} handleDetails={handleDetails} 
+        allPosts={meal} loading={loading} 
+        />}/>
+        {/* <Route path="/" element={<Home 
+        onSearch={onSearch} handleDetails={handleDetails} 
         allPosts={meal} currentPosts={currentPosts} loading={loading} 
         currentPage={currentPage} postsPerPage={postsPerPage} paginate={paginate}
-        />}/>
+        />}/> */}
         <Route path="/create" element={<Create />}/>
         <Route path='/details' element={<Details id={id}/>}/>
       </Routes>

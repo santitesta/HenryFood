@@ -1,25 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllDiets } from "../redux/actions"
+import { useSelector } from 'react-redux';
 
 import Posts from './Posts';
 import './Home.css'
+
 import { personalSorts } from '../Misc/sort'
 
 function Home({
-  currentPosts, allPosts, 
-  handleDetails, onSearch, loading,
-  currentPage, postsPerPage,paginate
+  onSearch, handleDetails,
+  allPosts, loading
 }) {
-  const dispatch = useDispatch();
   const diets = useSelector(state => state.diets)
 
   const [query, setQuery] = useState([])
   const [filtPosts, setFiltPosts] = useState([])
 
-  useEffect(() => {
-    dispatch(getAllDiets())
-  }, [dispatch])
+  // Pagination
+  let [currentPage, setCurrentPage] = useState(1);
+  let postsPerPage = 9
+  // Get current posts. Set posts per page
+  let indexOfLastPost = currentPage * postsPerPage;
+  let indexOfFirstPost = indexOfLastPost - postsPerPage;
+
+  let currentPosts = filtPosts.lenght
+  ?filtPosts.slice(indexOfFirstPost, indexOfLastPost)
+  :allPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Change page
+  const paginate = pageNumber => setCurrentPage(pageNumber);
 
   useEffect(() => {
     setFiltPosts([])
@@ -34,21 +42,29 @@ function Home({
   }
 
   function handleFilter(e) {
+    e.preventDefault()
     switch (e.target.name) {
       case 'alph':
-        setFiltPosts(personalSorts.orderAlph(currentPosts))
+        console.log('alph')
+        setFiltPosts(personalSorts.orderAlph(filtPosts.length?filtPosts:allPosts))
         break;
       case 'alphrev':
-        setFiltPosts(personalSorts.orderAlphRev(currentPosts))
+        console.log('alphrev')
+        setFiltPosts(personalSorts.orderAlphRev(filtPosts.length?filtPosts:allPosts))
         break;
       case 'points':
-        setFiltPosts(personalSorts.orderByPoints(currentPosts))
+        console.log('points')
+        setFiltPosts(personalSorts.orderByPoints(filtPosts.length?filtPosts:allPosts))
         break;
       case 'pointsrev':
-        setFiltPosts(personalSorts.orderByPointsRev(currentPosts))
+        console.log('pointsrev')
+        setFiltPosts(personalSorts.orderByPointsRev(filtPosts.length?filtPosts:allPosts))
         break;
       case 'diets':
-        setFiltPosts(personalSorts.filterByDiet(currentPosts,e.target.value))
+        setFiltPosts(personalSorts.filterByDiet(filtPosts.length?filtPosts:allPosts,e.target.value))
+        break;
+      default:
+        setFiltPosts([])
         break;
     }
   }
@@ -93,18 +109,19 @@ function Home({
           </div>
         </div>
 
-        <vl/>
-
         <div className='derecha'>
           <div className='banner'>aber</div>
 
-          <Posts currentPosts={filtPosts.length?filtPosts:currentPosts}
-            allPosts={allPosts}
-            loading={loading} handleDetails={handleDetails}
-            currentPage={currentPage}
-            postsPerPage={postsPerPage}
-            paginate={paginate}
+          <Posts 
+            handleDetails={handleDetails} 
+            allPosts={allPosts} currentPosts={currentPosts} loading={loading} 
+            currentPage={currentPage} postsPerPage={postsPerPage} paginate={paginate}
           />
+          {/* <Posts 
+            handleDetails={handleDetails} 
+            allPosts={allPosts} currentPosts={filtPosts.length?filtPosts:currentPosts} loading={loading} 
+            currentPage={currentPage} postsPerPage={postsPerPage} paginate={paginate}
+          /> */}
         </div>
 
       </div>
