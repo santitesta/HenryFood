@@ -56,30 +56,26 @@ function Home({
 
   function handleFilter(e) {
     e.preventDefault()
-    let arr1 = []
+    let aux = []
     if(filtPosts.length){
       filtPosts.forEach(element => {
-      arr1.push(element)
+      aux.push(element)
     })};
     switch (e.target.name) {
       case 'alph':
-        console.log('alph')
-        setFiltPosts(personalSorts.orderAlph(filtPosts.length?arr1:allPosts))
+        setFiltPosts(personalSorts.orderAlph(filtPosts.length?aux:allPosts))
         break;
       case 'alphrev':
-        console.log('alphrev')
-        setFiltPosts(personalSorts.orderAlphRev(filtPosts.length?arr1:allPosts))
+        setFiltPosts(personalSorts.orderAlphRev(filtPosts.length?aux:allPosts))
         break;
       case 'points':
-        console.log('points')
-        setFiltPosts(personalSorts.orderByPoints(filtPosts.length?arr1:allPosts))
+        setFiltPosts(personalSorts.orderByPoints(filtPosts.length?aux:allPosts))
         break;
       case 'pointsrev':
-        console.log('pointsrev')
-        setFiltPosts(personalSorts.orderByPointsRev(filtPosts.length?arr1:allPosts))
+        setFiltPosts(personalSorts.orderByPointsRev(filtPosts.length?aux:allPosts))
         break;
       case 'diets':
-        setFiltPosts(personalSorts.filterByDiet(filtPosts.length?arr1:allPosts,e.target.value))
+        setFiltPosts(personalSorts.filterByDiet(filtPosts.length?aux:allPosts,e.target.value))
         break;
       default:
         setFiltPosts([])
