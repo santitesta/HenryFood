@@ -13,20 +13,10 @@ const Posts = ({
   if (loading) return <h2>Loading...</h2>;
   if(!currentPosts.length) return <h1 className='testito'>Look after a meal! They will be displayed here</h1>
 
-  // Different quantity of columns depending on post quantities. TBD: Set CSS property 'ColumnCount'
-  let contClass = 'postscont3'
-  if(currentPosts.lenght <= 3 || currentPosts.length == 5 || currentPosts.length ==7) {
-    console.log('AHORA SOMOS 1 COLUMNA')
-    contClass = 'postscont1'
-  } else if(currentPosts.length == 4 || currentPosts.length == 8) {
-    console.log('AHORA SOMOS 2 COLUMNAS')
-    contClass = 'postscont2'
-  }
-
   console.log('Posts render')
   return (
     <>
-      <div className={contClass}>
+      <div className='postscont'>
         {currentPosts.map(r => {
           return(
             <div key={r.id} className='post'>
@@ -36,7 +26,7 @@ const Posts = ({
               <NavLink className='navlinktitle' to="/details" onClick={e => handleDetails(e.target.title || e.target.name)}>
                 <p className='postTitle' title={r.id}>{r.title || r.name}</p>
               </NavLink>
-              <span className='postDiets'>{r.diets?.length?<p>Diets: {r.diets.join('-')}</p>:<p>Diets: none</p>}</span>
+              <span className='postDiets'>{r.diets?.length?<p>{r.diets.join(' - ')}</p>:<p>Diets: none</p>}</span>
             </div>
         )})}
       </div>

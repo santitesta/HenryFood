@@ -7,33 +7,7 @@
 }
 
 /* All the posts */
-.postscont1 {
-  column-count: 1;
-  width: 1000px;
-  height: 2300px;
-  margin-left: 40px;
-  margin-top: 100px;
-  justify-content: space-evenly;
-}
-.postscont2 {
-  column-count: 2;
-  width: 800px;
-  height: 1000px;
-  margin-left: 40px;
-  margin-top: 100px;
-  justify-content: space-evenly;
-}
-/* .postscont3 {
-  column-count: 3;
-  width: 1200px;
-  height: 1000px;
-  margin-left: 40px;
-  margin-top: 100px;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  background-color: red;
-} */
-.postscont3 {
+.postscont {
   width: 1200px;
   height: 900px;
   margin-left: 40px;
@@ -42,42 +16,32 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  background-color: red;
+  /* background-color: red; */
 }
 
 .post {
   width: 33%;
-  height: 300px;
+  height: 33%;
+  display: flex;
+  flex-direction: column;
   flex: 0 1 33%;
   justify-content: center;
   align-items: center;
-  background-color: blue;
+  /* background-color: blue; */
 }
-/* .post {
-  width: 100%;
-  height: 333px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  overflow: hidden;
-  background-color: blue;
-} */
 
 .navlinktitle {
   text-decoration: none;
-  /* width: 250px; */
-  height: 10%;
-  background-color: violet;
+  width: 70%;
+  height: 15%;
+  /* background-color: green; */
 }
 
 .postTitle {
   margin: 0;
   padding: 0;
-  width: 70%;
-  height: 15%;
+  width: 100%;
+  height: 100%;
   color: black;
   display: flex;
   flex-direction: row;
@@ -85,18 +49,17 @@
   align-items: center;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: smaller;
-  background-color: green;
 }
 
 .postDiets {
   width: 70%;
-  height: 15%;
+  height: 5%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   font-size: smaller;
-  background-color: violet;
+  /* background-color: violet; */
 }
 
 .navlinkimg {
@@ -106,8 +69,8 @@
 }
 
 .postImg {
-  width: 70%;
-  height: 70%;
+  width: 100%;
+  height: 100%;
   margin: 0;
   object-fit: cover;
 }
