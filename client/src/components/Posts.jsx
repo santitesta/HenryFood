@@ -15,7 +15,7 @@ const Posts = ({
 
   console.log('Posts render')
   return (
-    <>
+    <div className='testeo'>
       <div className='postscont'>
         {currentPosts.map(r => {
           return(
@@ -36,7 +36,7 @@ const Posts = ({
         postsPerPage={postsPerPage}
         paginate={paginate}
       />
-    </>
+    </div>
   );
 };
 

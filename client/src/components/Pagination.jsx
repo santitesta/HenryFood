@@ -10,8 +10,6 @@ const Pagination = ({ allPosts, currentPage, postsPerPage, paginate }) => {
   
   return (
     <nav className='paginationnav'>
-      Pagination
-      <button>Fua negro</button>
       <div className='ulnav'>
         {pageNumbers.map(number => (
           <button key={number} className={currentPage==number?'activePage':null} onClick={() => paginate(number)}>

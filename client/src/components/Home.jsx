@@ -131,11 +131,6 @@ function Home({
             allPosts={allPosts} currentPosts={currentPosts} loading={loading} 
             currentPage={currentPage} postsPerPage={postsPerPage} paginate={paginate}
           />
-          {/* <Posts 
-            handleDetails={handleDetails} 
-            allPosts={allPosts} currentPosts={filtPosts.length?filtPosts:currentPosts} loading={loading} 
-            currentPage={currentPage} postsPerPage={postsPerPage} paginate={paginate}
-          /> */}
         </div>
 
       </div>

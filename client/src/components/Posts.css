@@ -16,7 +16,6 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  /* background-color: red; */
 }
 
 .post {
@@ -27,14 +26,12 @@
   flex: 0 1 33%;
   justify-content: center;
   align-items: center;
-  /* background-color: blue; */
 }
 
 .navlinktitle {
   text-decoration: none;
   width: 70%;
   height: 15%;
-  /* background-color: green; */
 }
 
 .postTitle {
@@ -59,7 +56,6 @@
   justify-content: center;
   align-items: center;
   font-size: smaller;
-  /* background-color: violet; */
 }
 
 .navlinkimg {
