@@ -4,33 +4,41 @@
   --hh: 25px;
 }
 
+input,select {font-family:inherit;}
+
 .mainhome {
   display: flex;
-  /* margin-top: -6px; */
+  flex-direction: column;
 }
 
-.derecha {
-  width: 80%;
+.mainhometitle {
+  font-size: 50px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
 .banner {
-  width: auto;
-  margin-left: 5%;
-  height: 300px;
-  background-image: url(https://images.pexels.com/photos/511763/pexels-photo-511763.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+  width: 100%;
+  height: 281px;
+  background-image: url(https://www.steriflow.com/wp-content/uploads/2020/12/propo-agro.jpg);
   background-size: cover;
+}
+
+.display {
+  display: flex;
+  flex-direction: row;
+  margin: 50px 0;
 }
 
 /* Filters */
 .filters {
   width: 15%;
   height: 100%;
-  margin-top: 400px;
-  margin-bottom: 50px;
   border-right: solid 3px gray;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .filtertitle {
-  font-size: 20px;
+  font-size: 25px;
   color: black;
 }
 
@@ -42,26 +50,49 @@
   justify-content: space-between;
 }
 
-.inputquery {
-  width: 100px;
+.mainsearch {
+  border: solid 2px green;
+  width: 200px;
+  height: 30px;
   margin-top: 20px;
+}
+
+.inputquery {
+  width: 160px;
+  height: 25px;
+  border: none;
+  /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+}
+
+.inputquery:focus {
+  outline: none;
 }
 
 .querybtn {
   background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQma2cYiuplKN08wKGL6EV1bLGrLzpcqyQZQg&usqp=CAU);
   background-size: cover;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
+  border: solid 2px white;
 }
 
-.labelbro{
-  color: black;
-  font-size: smaller;
+.orderlabel{
   flex-direction: column;
+  font-size: smaller;
+  /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+  color: black;
 }
 
 .filtbn {
   flex-direction: row;
+}
+
+.filtdiets {
+  width: 190px;
+  height: 25px;
+  border: solid 2px green;
+  border-radius: 10px;
+  /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
 }
 
 .filterupAlph {
@@ -89,3 +120,4 @@
   width: var(--wh);
   height: var(--hh);
 }
+

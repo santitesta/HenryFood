@@ -85,46 +85,47 @@ function Home({
 
   return (
       <div className='mainhome'>
+        <h1 className='mainhometitle'>Welcome to every chef dream!</h1>
+        <div className='banner'/>
 
-        <div id='myForm' className='filters' onSubmit={e => handleSubmit(e)}>
-          <label className='filtertitle'>Filters</label> 
 
-          <div className='columnsfil'>
-            <div>
-              <input data-testid='search-button' className='inputquery' type="text"
-                id="505"
-                placeholder='Name...' 
-                value={query} 
-                onChange={e => setQuery(e.target.value)}/>
-              <button className='querybtn' onClick={e => handleSubmit(e)}>.</button>
+        <div className='display'>
+          <div id='myForm' className='filters' onSubmit={e => handleSubmit(e)}>
+            <label className='filtertitle'>Filters</label> 
+
+            <div className='columnsfil'>
+              <div className='mainsearch'>
+                <input data-testid='search-button' className='inputquery' type="text"
+                  id="505"
+                  placeholder='Name...' 
+                  value={query} 
+                  onChange={e => setQuery(e.target.value)}/>
+                <button className='querybtn' onClick={e => handleSubmit(e)}>.</button>
+              </div>
+
+              <select className='filtdiets' name="diets" id="909" onChange={e => handleFilter(e)}>
+                <option defaultValue={true}>Filter by diet!</option>
+                {diets.map(d => {
+                  return <option key={d.id} value={d.name}>{d.name}</option>
+                })}
+              </select>
+
+              <label className='orderlabel'>Order alphabetically
+                <div className='filtbn'>
+                  <button name='alph' className='filterdownAlph' onClick={e => handleFilter(e)}>A-Z</button>
+                  <button name='alphrev' className='filterupAlph' onClick={e => handleFilter(e)}>Z-A</button>
+                </div>
+              </label>
+
+              <label className='orderlabel'>Order by punctuation
+                <div className='filtbn'>
+                  <button name='points' className='filterdownPoints' onClick={e => handleFilter(e)}>.</button>
+                  <button name='pointsrev' className='filterupPoints' onClick={e => handleFilter(e)}>.</button>
+                </div>
+              </label>
+
             </div>
-
-            <select name="diets" id="909" onChange={e => handleFilter(e)}>
-              <option defaultValue={true}>Filter by diet!</option>
-              {diets.map(d => {
-                return <option key={d.id} value={d.name}>{d.name}</option>
-              })}
-            </select>
-
-            <label className='labelbro'>Order alphabetically
-              <div className='filtbn'>
-                <button name='alph' className='filterdownAlph' onClick={e => handleFilter(e)}>A-Z</button>
-                <button name='alphrev' className='filterupAlph' onClick={e => handleFilter(e)}>Z-A</button>
-              </div>
-            </label>
-
-            <label className='labelbro'>Order by punctuation
-              <div className='filtbn'>
-                <button name='points' className='filterdownPoints' onClick={e => handleFilter(e)}>.</button>
-                <button name='pointsrev' className='filterupPoints' onClick={e => handleFilter(e)}>.</button>
-              </div>
-            </label>
-
           </div>
-        </div>
-
-        <div className='derecha'>
-          <div className='banner'>aber</div>
 
           <Posts 
             handleDetails={handleDetails} 

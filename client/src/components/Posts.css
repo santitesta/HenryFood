@@ -3,15 +3,13 @@
   width: 500px;
   height: 200px;
   margin-left: 150px;
-  margin-top: 120px;
 }
 
 /* All the posts */
 .postscont {
   width: 1200px;
   height: 900px;
-  margin-left: 40px;
-  margin-top: 100px;
+  margin-left: 25px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

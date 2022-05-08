@@ -10,12 +10,11 @@ const Posts = ({
   currentPage, postsPerPage, paginate
 }) => {
   //Returns of incomplete searchs
-  if (loading) return <h2>Loading...</h2>;
+  if (loading) return <h2 className='testito'>Loading...</h2>;
   if(!currentPosts.length) return <h1 className='testito'>Look after a meal! They will be displayed here</h1>
 
-  console.log('Posts render')
   return (
-    <div className='testeo'>
+    <div>
       <div className='postscont'>
         {currentPosts.map(r => {
           return(
