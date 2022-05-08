@@ -15,9 +15,7 @@ function Home({
   const [query, setQuery] = useState([])
   const [filtPosts, setFiltPosts] = useState([])
   const [currentPosts, setCurrentPosts] = useState([])
-  // Filt posts es un array, por eso no detecta cambios, a menos que sea en su length. Chequear
 
-  console.log('Home render')
   // Pagination
   let [currentPage, setCurrentPage] = useState(1);
   let postsPerPage = 9
@@ -26,18 +24,10 @@ function Home({
   let indexOfFirstPost = indexOfLastPost - postsPerPage;
 
   useEffect(() => {
-    console.log('filtPosts has changed')
-  }, [filtPosts])
-
-  useEffect(() => {
     setCurrentPosts(filtPosts.length
       ?filtPosts.slice(indexOfFirstPost, indexOfLastPost)
       :allPosts.slice(indexOfFirstPost, indexOfLastPost))
   }, [filtPosts, currentPage])
-  
-  // let currentPosts = filtPosts.lenght
-  // ?filtPosts.slice(indexOfFirstPost, indexOfLastPost)
-  // :allPosts.slice(indexOfFirstPost, indexOfLastPost)
 
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
@@ -90,7 +80,7 @@ function Home({
 
 
         <div className='display'>
-          <div id='myForm' className='filters' onSubmit={e => handleSubmit(e)}>
+          <form id='myForm' className='filters' onSubmit={e => handleSubmit(e)}>
             <label className='filtertitle'>Filters</label> 
 
             <div className='columnsfil'>
@@ -100,7 +90,7 @@ function Home({
                   placeholder='Name...' 
                   value={query} 
                   onChange={e => setQuery(e.target.value)}/>
-                <button className='querybtn' onClick={e => handleSubmit(e)}>.</button>
+                <button tpye='submit' className='querybtn' onClick={e => handleSubmit(e)}>.</button>
               </div>
 
               <select className='filtdiets' name="diets" id="909" onChange={e => handleFilter(e)}>
@@ -125,11 +115,11 @@ function Home({
               </label>
 
             </div>
-          </div>
+          </form>
 
           <Posts 
             handleDetails={handleDetails} 
-            allPosts={allPosts} currentPosts={currentPosts} loading={loading} 
+            allPosts={filtPosts.length?filtPosts:allPosts} currentPosts={currentPosts} loading={loading} 
             currentPage={currentPage} postsPerPage={postsPerPage} paginate={paginate}
           />
         </div>

@@ -8,10 +8,6 @@ function Create() {
   const dispatch = useDispatch();
   const diets = useSelector(state => state.diets)
 
-  useEffect(() => {
-    dispatch(getAllDiets())
-  }, [dispatch])
-
   const [recipe, setRecipe] = useState({})
   const [dietrec, setDietrec] = useState([])
   const [errors, setErrors] = useState({});

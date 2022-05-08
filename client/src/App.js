@@ -19,9 +19,12 @@ function App() {
   const recipes = useSelector(state => state.recipes)
   
   // This is for future improvements, like creating diets
+  // useEffect(() => {
+  //   dispatch(getAllDiets())
+  // }, [dispatch] )
   useEffect(() => {
     dispatch(getAllDiets())
-  }, [dispatch] )
+  }, [] )
   
   useEffect(() => {
     if(recipes[0] === 'empty') {
