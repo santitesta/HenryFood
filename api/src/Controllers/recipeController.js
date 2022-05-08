@@ -30,6 +30,52 @@ async function getRecipe(req,res){
     let recipesDB = await Recipes.findAll()
     let recipesfound = recipesDB.filter(r => r.name === query).slice(0,90)
 
+    let allDiets = []
+    
+    // console.log('Esto es recipesfound: ', typeof(recipesfound),recipesfound)
+    for (let i = 0; i < recipesfound.length; i++) {
+      let dietsfound = []
+      let dietbro = await recipesfound[i].getDiets()
+      console.log('Dietbro: ',dietbro)
+      for (let j = 0; j < dietbro.length; j++) {
+        dietsfound.push(dietbro[j].dataValues.name)
+      }
+      allDiets.push(dietsfound)
+    }
+
+    // recipesfound.forEach(async (r,index) => {
+    //   let dietbro = await r.getDiets()
+    //   dietsfound.push(dietbro[index].dataValues.name)
+    // })
+
+    recipesfound.map((r,index) => {
+      r.dataValues.diets = allDiets[index]
+    })
+
+    console.log('recipesfound asdfasdf: ',recipesfound[0].dataValues.diets)
+    // let recipeonly = await Recipes.findOne({
+    //   where: {
+    //     name: query
+    //   }
+    // })
+
+    // console.log('Esto es recipesonly',recipeonly)
+    // let hisDiets = await recipeonly.getDiets()
+    // console.log('Estas son sus dietas: ',hisDiets[0].dataValues.name)
+
+    // recipesfound.forEach(async (element) => {
+    //   let found = await Diets.findOne({
+    //     where: {
+    //       id: element.id
+    //     }
+    //   })
+    //   dietsfound.push(found)
+    //   console.log('Este es el tipo de found',typeof(found))
+    //   found = {}
+    // });
+
+    // console.log('Estas son las dietas que matchean',dietsfound)
+    // recipesfound = {...recipesfound, diets: dietsfound}
 
     if(!recipesfound.length && !recipesAPI.length) {
       return res.send(['empty'])
