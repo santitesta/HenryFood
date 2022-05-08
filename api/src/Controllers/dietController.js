@@ -62,7 +62,7 @@ async function createDiet(req,res,next){
 
 async function chargeDiets(req,res){
   return Diets.bulkCreate(apiDiets)
-    .then(response => console.log('API Diets loaded'))
+    .then(console.log('API Diets loaded'))
     .catch(error => console.log(error))
 }
 
