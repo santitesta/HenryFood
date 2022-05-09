@@ -27,7 +27,7 @@ function Home({
     setCurrentPosts(filtPosts.length
       ?filtPosts.slice(indexOfFirstPost, indexOfLastPost)
       :allPosts.slice(indexOfFirstPost, indexOfLastPost))
-  }, [filtPosts, currentPage])
+  }, [filtPosts, currentPage, allPosts, indexOfFirstPost, indexOfLastPost])
 
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);

@@ -15,6 +15,8 @@ export const personalSorts = {
     return posts.sort((a,b)=> a.points - b.points)
   },
   filterByDiet: function(posts, dietName) {
-    return posts.filter(p => p.diets.includes(dietName.toLowerCase()))
+    let sorted = posts.filter(p => p.diets.includes(dietName.toLowerCase()))
+    if(sorted.length) { return sorted }
+    else {return ['empty']}
   }
 };

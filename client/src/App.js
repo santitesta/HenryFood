@@ -1,10 +1,11 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDiets, getRecipes } from './redux/actions';
 
+import Landing from './components/Landing.jsx'
 import Home from './components/Home.jsx'
 import Create from './components/Create';
 import Nav from './components/Nav.jsx'
@@ -49,19 +50,16 @@ function App() {
     setLoading(false)
   }
 
+  const {pathname} = useLocation()
   return (
     <div className="App">
-      <Nav/>
+      {pathname === '/'?null:<Nav/>}
       <Routes>
-        <Route path="/" element={<Home 
+        <Route path='/' element={<Landing/>}/>
+        <Route path="/home" element={<Home 
         onSearch={onSearch} handleDetails={handleDetails} 
         allPosts={meal} loading={loading} 
         />}/>
-        {/* <Route path="/" element={<Home 
-        onSearch={onSearch} handleDetails={handleDetails} 
-        allPosts={meal} currentPosts={currentPosts} loading={loading} 
-        currentPage={currentPage} postsPerPage={postsPerPage} paginate={paginate}
-        />}/> */}
         <Route path="/create" element={<Create />}/>
         <Route path='/details' element={<Details id={id}/>}/>
       </Routes>

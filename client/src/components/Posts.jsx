@@ -12,7 +12,7 @@ const Posts = ({
   //Returns of incomplete searchs
   if (loading) return <h2 className='testito'>Loading...</h2>;
   if(!currentPosts.length) return <h1 className='testito'>Look after a meal! They will be displayed here</h1>
-
+  if(currentPosts[0] === 'empty') return <h1 className='testito'>Nothing on that diet!</h1>
   return (
     <div>
       <div className='postscont'>

@@ -29,7 +29,7 @@ function Details({id}) {
 
   return (
     <>
-      <NavLink to='/'>Return</NavLink>
+      <NavLink to='/home'>Return</NavLink>
       {
       !Object.keys(recipe).length?<h1>Loading...</h1>
       :<div className='container'>
