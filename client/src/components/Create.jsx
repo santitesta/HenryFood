@@ -21,6 +21,7 @@ function Create() {
     console.log(newRec)
     dispatch(createRecipe(newRec))
     document.getElementById('101').reset()
+    setDietrec([])
   }
 
   function handleChange(e) {
@@ -48,100 +49,105 @@ function Create() {
   }
 
   return (
-      <div className='condet'>
-        <form type="submit" className='form1' id='101'>
+        <form className='condet' type="submit" id='101'>
 
-          <div className='minicont'>
-            <div className='errorsadd'>
-              <label>Name</label>
-              <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='name' placeholder='Name your recipe...' />
-              {errors.name?<p className='errors'>{errors.name}</p>:<p/>}
-            </div>
-          </div>
+          <div className='createleft'>
 
-          {/* <br /> */}
-
-          <div className='minicont'>
-            <div className='errorsadd'>
-              <label>Summary</label>
-              <input className='summaryinp' onChange={e => handleChange(e)} type='text' name='summary' placeholder='Whats the deal?...'/>
-              {errors.summary?<p className='errors'>{errors.summary}</p>:<p/>}
-            </div>
-          </div>
-
-          <br />
-
-          <div className='minicont'>
-            <div className='errorsadd'>
-              <label>Score</label>
-              <input className='inputsc' onChange={e => handleChange(e)} type="number" id='' name='points' placeholder='Score out of 100...' />
-              {errors.points?<p className='errors'>{errors.points}</p>:<p/>}
-            </div>
-          </div>
-
-          <div className='minicont'>
-            <div className='errorsadd'>
-              <label>Healthness</label>
-              <input className='inputsc' onChange={e => handleChange(e)} type="number" id='' name='healthness' placeholder='Score out of 100...' />
-              {errors.healthness?<p className='errors'>{errors.healthness}</p>:<p/>}
-            </div>
-          </div>
-
-          <br />
-          <div className='minicont'>
-            <div className='errorsadd'>
-              <label>Image</label>
-              <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='image' placeholder='Insert image as url...' />
-              <p/>
-            </div>
-          </div>
-
-          <br />
-
-          {
-            !diets?null:<div className='minicont'>
+            <div className='minicont'>
               <div className='errorsadd'>
-                <label>Diets</label>
-                <select className='inputsc' name='diets' onChange={e => handleDiets(e)}>
-                  <option defaultValue={true} value={0}>Choose your diet!</option>
-                  {diets.map(d => {
-                    return <option key={d.id} value={d.id} className={dietrec.includes(`${d.id}`)?'dietchose':'dietunchose'}>
-                      {d.id}.{d.name}
-                    </option>
-                  })}
-                </select>
+                <label>Name</label>
+                <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='name' placeholder='Name your recipe...' />
+                {errors.name?<p className='errors'>{errors.name}</p>:<p/>}
+              </div>
+            </div>
+
+            <div className='minicont'>
+              <div className='errorsadd'>
+                <label>Summary</label>
+                <input className='summaryinp' onChange={e => handleChange(e)} type='text' name='summary' placeholder='Whats the deal?...'/>
+                {errors.summary?<p className='errors'>{errors.summary}</p>:<p/>}
+              </div>
+            </div>
+
+            <br />
+
+            <div className='minicont'>
+              <div className='errorsadd'>
+                <label>Score</label>
+                <input className='inputsc' onChange={e => handleChange(e)} type="number" id='' name='points' placeholder='Score out of 100...' />
+                {errors.points?<p className='errors'>{errors.points}</p>:<p/>}
+              </div>
+            </div>
+
+            <div className='minicont'>
+              <div className='errorsadd'>
+                <label>Healthness</label>
+                <input className='inputsc' onChange={e => handleChange(e)} type="number" id='' name='healthness' placeholder='Score out of 100...' />
+                {errors.healthness?<p className='errors'>{errors.healthness}</p>:<p/>}
+              </div>
+            </div>
+
+            <br />
+            <div className='minicont'>
+              <div className='errorsadd'>
+                <label>Image</label>
+                <input className='inputsc' onChange={e => handleChange(e)} type="text" id='' name='image' placeholder='Insert image as url...' />
                 <p/>
               </div>
             </div>
-          }
 
-          <div className='minicont'>
-            <span>Steps</span>
-          </div>
+            <br />
 
-          {
-            !dietrec.length?<div className='minicont'><div className='delete'><p>No diets chosen</p></div></div>:<div className='minicont'>
-              <div className='delete'>
-                {dietrec.map(d => {
-                  return (<div key={d}>
-                    <span>{d}</span>
-                    <button value={d} onClick={e => handleDelete(e)}>X</button>
-                  </div>)
-                })}
+            {
+              !diets?null:<div className='minicont'>
+                <div className='errorsadd'>
+                  <label>Diets</label>
+                  <select className='inputsc' name='diets' onChange={e => handleDiets(e)}>
+                    <option defaultValue={true} value={0}>Choose your diet!</option>
+                    {diets.map(d => {
+                      return <option key={d.id} value={d.id} className={dietrec.includes(`${d.id}`)?'dietchose':'dietunchose'}>
+                        {d.id}.{d.name}
+                      </option>
+                    })}
+                  </select>
+                  <p/>
+                </div>
               </div>
+            }
+
+            <div className='minicont'>
+              <span>Steps</span>
             </div>
-          }
 
-          <div className='minicont'>
-            <textarea name="steps" id="" cols="40" rows="7" onChange={e => handleChange(e)}></textarea>
+            {
+              !dietrec.length?<div className='minicont'><div className='delete'><p>No diets chosen</p></div></div>:<div className='minicont'>
+                <div className='delete'>
+                  {dietrec.map(d => {
+                    return (<div key={d}>
+                      <span>{d}</span>
+                      <button value={d} onClick={e => handleDelete(e)}>X</button>
+                    </div>)
+                  })}
+                </div>
+              </div>
+            }
+
           </div>
-
-          <button className='submitbutton' type="submit" onClick={e => handleSubmit(e)}>
-            Create Recipe!
-          </button>
           
+          <div className='createright'>
+            <div className='createbottom'>
+
+              <div>
+                <textarea className='textarea' name="steps" id="" cols="40" rows="7" onChange={e => handleChange(e)}></textarea>
+              </div>
+
+              <button className='submitbutton' type="submit" onClick={e => handleSubmit(e)}>
+                Create Recipe!
+              </button>
+
+            </div>
+          </div>
         </form>
-      </div>
   );
 };
 
