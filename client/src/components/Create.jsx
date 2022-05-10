@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createRecipe, getAllDiets } from "../redux/actions"
+import { createRecipe } from "../redux/actions"
 import './Create.css'
 import { validate } from '../Misc/validate'
 
@@ -18,7 +18,6 @@ function Create() {
       return alert('The form is not completed right')
     }
     let newRec = {...recipe, diet: dietrec.map(d => parseInt(d))}
-    console.log(newRec)
     dispatch(createRecipe(newRec))
     document.getElementById('101').reset()
     setDietrec([])
@@ -44,7 +43,6 @@ function Create() {
 
   function handleDelete(e) {
     e.preventDefault()
-    //There's a problem comparing strings to number in ids: 1 != '1'
     setDietrec(dietrec.filter(d => d != e.target.value))
   }
 

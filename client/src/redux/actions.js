@@ -31,7 +31,7 @@ export const getAllDiets = () => {
 export const createRecipe = (recipe) => {
     return function(){
         return axios.post("http://localhost:3001/recipe", recipe)
-            .then(alert('Successfully created!'))
+            .then(resp => alert('Successfully created!'))
             .catch(error => alert(error))
     }
 }

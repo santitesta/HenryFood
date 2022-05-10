@@ -5,11 +5,12 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllDiets, getRecipes } from './redux/actions';
 
+import Nav from './components/Nav.jsx'
 import Landing from './components/Landing.jsx'
 import Home from './components/Home.jsx'
 import Create from './components/Create';
-import Nav from './components/Nav.jsx'
 import Details from './components/Details.jsx';
+import NotFound from './components/NotFound';
 
 function App() {
   let dispatch = useDispatch()
@@ -62,6 +63,7 @@ function App() {
         />}/>
         <Route path="/create" element={<Create />}/>
         <Route path='/details' element={<Details id={id}/>}/>
+        <Route path='*' element={<NotFound/>}/>
       </Routes>
     </div>
   );

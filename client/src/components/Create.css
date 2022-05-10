@@ -7,7 +7,7 @@
   background-size: cover;
   display: flex;
   flex-direction: row;
-  color: brown;
+  color: black;
 }
 
 .createleft {
@@ -46,7 +46,7 @@
 .errors {
   display: flex;
   font-size: 11px;
-  color: crimson;
+  color: black;
   margin-top: 2px;
 }
 
