@@ -1,5 +1,3 @@
-// const axios = require("axios")
-// const URL = "https://rickandmortyapi.com/api"
 const { Diets } = require('../db')
 
 apiDiets = [{
@@ -46,7 +44,7 @@ apiDiets = [{
 
 async function getDiets(req,res){
   let diets = await Diets.findAll()
-  res.send(diets)
+  res.json(diets)
 }
 
 async function createDiet(req,res,next){

@@ -16,27 +16,22 @@ module.exports = (sequelize) => {
     },
     summary: {
       type: DataTypes.TEXT,
-      allowNull: false,
       defaultValue: 'No summary available'
     },
     points: {
       type: DataTypes.STRING,
-      allowNull: false,
       defaultValue: '-'
     },
     healthness: {
       type: DataTypes.STRING,
-      allowNull: false,
       defaultValue: '-'
     },
     steps: {
       type: DataTypes.TEXT,
-      allowNull: false,
       defaultValue: 'No steps defined'
     },
     image: {
       type: DataTypes.TEXT,
-      allowNull: false,
       defaultValue: 'No image presented'
     }
   },

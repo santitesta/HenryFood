@@ -1,15 +1,10 @@
 const axios = require("axios")
-const { Recipes, Diets } = require("../db")
+const { Recipes} = require("../db")
 
 require('dotenv').config();
 const { apiKey } = process.env;
 const URLid = "https://api.spoonacular.com/recipes/"
 const URLcs = `https://api.spoonacular.com/recipes/complexSearch?addRecipeInformation=true&apiKey=${apiKey}`
-
-// Downloaded 100 results from API and stored it
-// const fs = require('fs');
-// let jsonData = JSON.parse(fs.readFileSync('spoonacular.json', 'utf-8'))
-
 
 // !! Refactor getRecipe, API and DB separated
 async function getRecipe(req,res){
@@ -27,9 +22,12 @@ async function getRecipe(req,res){
         diets: e.diets
       }
     })
-    
-    let recipesDB = await Recipes.findAll()
-    let recipesfound = recipesDB.filter(r => r.name.toLowerCase() === query).slice(0,90)
+
+    let recipesfound = await Recipes.findAll({
+      where: {
+        name: query
+      }
+    })
 
     let allDiets = []
 
@@ -50,11 +48,11 @@ async function getRecipe(req,res){
       return res.status(404).send('Recipe not found!')
     }
     if(recipesfound.length) {
-      let allRecipes = recipesfound.concat(recipesAPI)
-      return res.send(allRecipes)
+      let allRecipes = recipesfound.concat(recipesAPI).slice(0,90)
+      return res.json(allRecipes)
     } else {
       let allRecipes = recipesAPI
-      return res.send(allRecipes)
+      return res.json(allRecipes)
     }
 
   } catch (error) {
@@ -71,7 +69,7 @@ async function getRecipeById(req,res){
         id: id
       }
     })
-    res.send(recipedb)
+    res.json(recipedb)
   } else {
     await axios.get(`${URLid}${id}/information?apiKey=${apiKey}`)
       .then(response => {
@@ -86,7 +84,7 @@ async function getRecipeById(req,res){
           dishTypes: response.data.dishTypes,
           analyzedInstructions: response.data.analyzedInstructions
         }
-        res.send(recipe)
+        res.json(recipe)
       })
       .catch(error => res.status(400).send(error))
   }
@@ -97,7 +95,7 @@ async function createRecipe(req,res){
   let recipe = {name, summary, points, image, steps, healthness}
   Recipes.create(recipe)
     .then(reci => reci.addDiets(diet))
-    .then(reci => res.status(201).send(reci))
+    .then(reci => res.status(201).json(reci))
     .catch(error => res.status(500).send(error))
 }
 
