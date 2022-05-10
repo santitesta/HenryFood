@@ -84,7 +84,7 @@ async function getRecipeById(req,res){
           image: response.data.image,
           diets: response.data.diets,
           dishTypes: response.data.dishTypes,
-          analyzedInstructions: response.data.analyzedInstructions,
+          analyzedInstructions: response.data.analyzedInstructions
         }
         res.send(recipe)
       })
