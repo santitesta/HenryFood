@@ -28,29 +28,34 @@ function Details({id}) {
   }
 
   return (
-    <>
-      <NavLink to='/home'>Return</NavLink>
+    <div className='detailsCont'>
       {
-      !Object.keys(recipe).length?<h1>Loading...</h1>
-      :<div className='container'>
-        <h1>Those are the details of {recipe.name}!</h1>
-        <img src={recipe.image} alt={`${recipe.name} not found`} />
-        <p>Dish types: {recipe.dishTypes}</p>
-        <p>Diets: {recipe.diets?recipe.diets:'Not part of any diet registered'}</p>
-        <p>Summary: {recipe.summary}</p>
-        <p>Spoonacular score: {recipe.spoonacularScore}</p>
-        <p>Health score: {recipe.healthScore}</p>
-        <div className='steps'>
-          {
-            String(id).length > 7?<p>Steps for a database recipe: {recipe.steps}</p>
-            :recipe.analyzedInstructions[0].steps.map(s => {
-              return (<p key={s.number}>Step {s.number}: {s.step}</p>)
-            })
-          }
+        !Object.keys(recipe).length?<h1 className='detailsLoading'>Loading...</h1>
+        :<div className='detailsMiniCont'>
+          <div className='detailsLeft'>
+            <img src={recipe.image} alt={`${recipe.name} not found`} className='detailsImage'/>
+            <p><span className='detailsLabels'>Dish types: </span>{recipe.dishTypes}</p>
+            <p><span className='detailsLabels'>Diets: </span>{recipe.diets?recipe.diets.join(' - '):'Not part of any diet registered'}</p>
+            <p><span className='detailsLabels'>Spoonacular score: </span>{recipe.points?recipe.points:'-'}</p>
+            <p><span className='detailsLabels'>Health score: </span>{recipe.healthScore}</p>
+            <NavLink to='/home' className='detailsReturn'>Return</NavLink>
+          </div>
+          <div className='detailsRight'>
+            <h1 className='detTitle'>{recipe.name}</h1>
+            <p className='detailsSummary' dangerouslySetInnerHTML={{__html: recipe.summary}}></p>
+            {/* <p className='detailsSummary'>Summary: {recipe.summary}</p> */}
+            <div className='steps'>
+              {
+                String(id).length > 7?<p>{recipe.steps}</p>
+                :recipe.analyzedInstructions[0].steps.map(s => {
+                  return (<p key={s.number}>Step {s.number}: {s.step}</p>)
+                })
+              }
+            </div>
+          </div>
         </div>
-      </div>
       }
-    </>
+    </div>
   )
 };
   
