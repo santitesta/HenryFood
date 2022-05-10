@@ -15,7 +15,7 @@ function Create() {
   function handleSubmit(e) {
     e.preventDefault()
     if(Object.keys(errors).length) {
-      return alert('The form is not right, please check the errors')
+      return alert('The form is not right, please check')
     }
     let newRec = {...recipe, diet: dietrec.map(d => parseInt(d))}
     dispatch(createRecipe(newRec))
@@ -26,12 +26,8 @@ function Create() {
   function handleChange(e) {
     let item = e.target.name
 
-    if(item === 'name' || item === 'points' || item === 'healthness') {
-      setErrors(validate({...recipe, [item]:e.target.value }, item))
-      setRecipe({...recipe, [item]:e.target.value})
-    } else {
-      setRecipe({...recipe, [item]:e.target.value})
-    }
+    setErrors(validate({...recipe, [item]:e.target.value }))
+    setRecipe({...recipe, [item]:e.target.value})
   }
 
   function handleDiets(e) {
