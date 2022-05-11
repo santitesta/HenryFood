@@ -53,8 +53,6 @@
   position: fixed;
   bottom: 10px;
   left: 10px;
-  /* align-self: flex-start;
-  margin-left: 10px; */
 }
 
 .detailsLoading {

@@ -144,6 +144,10 @@ function Create() {
 
       </div>
       
+      {/* Validate Steps so every row of the text area matches the pattern:
+      1. First step
+      2. Second step...
+      */}
       <div className='createright'>
         <div className='createbottom'>
 
