@@ -44,9 +44,8 @@ function Home({
     }
   }
 
-  console.log('Filt posts: ',filtPosts)
-  console.log('All posts: ',allPosts)
-  filtPosts.forEach(e => console.log(e.healthScore))
+  console.log('Points list: ')
+  filtPosts.forEach(e => console.log('Points: ',e.healthScore))
 
   function handleFilter(e) {
     e.preventDefault()
@@ -85,14 +84,14 @@ function Home({
 
         <div className='display'>
           <form id='myForm' className='filters' onSubmit={e => handleSubmit(e)}>
-            <label className='filtertitle'>Filters</label> 
+            <label className='filtertitle'></label> 
 
             <div className='columnsfil'>
               <div className='mainsearch'>
                 <input data-testid='search-button' className='inputquery' type="text"
                   id="505"
                   placeholder='Name...' 
-                  value={query} 
+                  value={query}
                   onChange={e => setQuery(e.target.value)}/>
                 <button tpye='submit' className='querybtn' onClick={e => handleSubmit(e)}>.</button>
               </div>
@@ -111,7 +110,7 @@ function Home({
                 </div>
               </label>
 
-              <label className='orderlabel'>Order by punctuation
+              <label className='orderlabel'>Order by health score
                 <div className='filtbn'>
                   <button name='points' className='filterdownPoints' onClick={e => handleFilter(e)}>.</button>
                   <button name='pointsrev' className='filterupPoints' onClick={e => handleFilter(e)}>.</button>
