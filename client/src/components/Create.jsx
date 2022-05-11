@@ -126,7 +126,7 @@ function Create() {
           !dietrec.length
           ?<div className='minicont'>
             <div className='delete'>
-              <p>No diets chosen</p>
+              <p className='nodiets'>No diets chosen</p>
             </div>
           </div>
           :<div className='minicont'>
@@ -134,7 +134,7 @@ function Create() {
               {dietrec.map(d => {
                 return (<div key={d}>
                   <button className='deleteBtn' value={d} onClick={e => handleDelete(e)}>
-                    {d}<span className='deleteX'>X</span>
+                    {d}<span className={d > 9?'deleteX2':'deleteX1'}>X</span>
                   </button>
                 </div>)
               })}

@@ -44,6 +44,10 @@ function Home({
     }
   }
 
+  console.log('Filt posts: ',filtPosts)
+  console.log('All posts: ',allPosts)
+  filtPosts.forEach(e => console.log(e.healthScore))
+
   function handleFilter(e) {
     e.preventDefault()
     let aux = []

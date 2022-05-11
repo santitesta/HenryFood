@@ -101,12 +101,31 @@
   font-size: small;
 }
 
+.nodiets {
+  margin-bottom: 100px;
+  margin-left: 10px;
+  font-size: larger;
+  background-color: rgba(255, 255, 255, 0.481);
+}
+
 .deleteBtn {
   width: 28px;
   height: 25px;
+  background-color: white;
+  border: solid 1px dodgerblue;
+  margin-left: 2px;
 }
 
-.deleteX {
+.deleteX1 {
+  position: relative;
+  left: 5px;
+  bottom: 8px;
+  font-size: xx-small;
+  border: solid 1px black;
+  background-color: red;
+}
+
+.deleteX2 {
   position: relative;
   bottom: 8px;
   font-size: xx-small;
@@ -119,11 +138,12 @@
   height: 200px;
 }
   
-  .submitbutton{
-    width: 270px;
-    height: 60px;
-  }
-  
-  .submitbutton:hover {
-    color: green;
-  }
+.submitbutton{
+  width: 270px;
+  height: 60px;
+  margin-left: 50px;
+}
+
+.submitbutton:hover {
+  color: green;
+}

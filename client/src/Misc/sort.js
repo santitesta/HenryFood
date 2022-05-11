@@ -9,10 +9,10 @@ export const personalSorts = {
     return posts.sort((a,b) => (a.title.toLowerCase() < b.title.toLowerCase()) ? 1 : -1)
   },
   orderByPoints: function(posts) {
-    return posts.sort((a,b)=> a.points - b.points).reverse()
+    return posts.sort((a,b)=> a.healthScore - b.healthScore).reverse()
   },
   orderByPointsRev: function(posts) {
-    return posts.sort((a,b)=> a.points - b.points)
+    return posts.sort((a,b)=> a.healthScore - b.healthScore)
   },
   filterByDiet: function(posts, dietName) {
     if(posts[0] === 'empty') {
