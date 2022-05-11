@@ -88,10 +88,10 @@ function Create() {
             <label className='insideLabel'>Healthness</label>
           </div>
           <div className='formInput'>
-          <input className='inputsc' onChange={e => handleChange(e)} type="number" id='' name='healthness' placeholder='Score out of 100...' />            
+          <input className='inputsc' onChange={e => handleChange(e)} type="number" id='' name='healthScore' placeholder='Score out of 100...' />            
           </div>
           <div className='formErrors'>
-            {errors.healthness?<p className='errorsp'>{errors.healthness}</p>:null}
+            {errors.healthScore?<p className='errorsp'>{errors.healthScore}</p>:null}
           </div>
         </div>
 

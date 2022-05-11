@@ -10,7 +10,7 @@ const URLcs = `https://api.spoonacular.com/recipes/complexSearch?addRecipeInform
 async function getRecipe(req,res){
   try {
 
-    let query = req.query.query.toLowerCase()
+    let query = req.query.query
     let recipesAPI = (await axios.get(`${URLcs}&query=${query}&number=90`)).data.results
     .map(e => {
       return {
@@ -92,8 +92,8 @@ async function getRecipeById(req,res){
 }
 
 async function createRecipe(req,res){
-  const {name, summary, points, image, steps, healthness, diet} = req.body
-  let recipe = {name, summary, points, image, steps, healthness}
+  const {name, summary, points, image, steps, healthScore, diet} = req.body
+  let recipe = {name, summary, points, image, steps, healthScore}
   Recipes.create(recipe)
     .then(reci => reci.addDiets(diet))
     .then(reci => res.status(201).json(reci))

@@ -11,8 +11,8 @@ export const validate = (input) => {
     errors.points = 'Must be a number between 0 and 100'
   }
 
-  if(Number(input.healthness) < 0 || Number(input.healthness) > 100) {
-    errors.healthness = 'Must be a number between 0 and 100'
+  if(Number(input.healthScore) < 0 || Number(input.healthScore) > 100) {
+    errors.healthScore = 'Must be a number between 0 and 100'
   }
 
   return errors

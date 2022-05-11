@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       defaultValue: '-'
     },
-    healthness: {
+    healthScore: {
       type: DataTypes.STRING,
       defaultValue: '-'
     },
