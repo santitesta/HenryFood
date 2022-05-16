@@ -20,7 +20,9 @@ async function getRecipe(req,res){
         points: e.spoonacularScore,
         healthScore: e.healthScore,
         image: e.image,
-        diets: e.diets
+        diets: e.diets,
+        pricePerServing: e.pricePerServing,
+        readyInMinutes: e.readyInMinutes
       }
     })
 

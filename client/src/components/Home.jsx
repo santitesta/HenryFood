@@ -46,6 +46,8 @@ function Home({
 
   console.log('Points list: ')
   filtPosts.forEach(e => console.log('Points: ',e.healthScore))
+  console.log('Minutes list: ')
+  filtPosts.forEach(e => console.log('Points: ',e.readyInMinutes))
 
   function handleFilter(e) {
     e.preventDefault()
@@ -70,6 +72,10 @@ function Home({
       case 'diets':
         setFiltPosts(personalSorts.filterByDiet(filtPosts.length?aux:allPosts,e.target.value))
         break;
+      case 'readyInMinutes':
+        setFiltPosts(personalSorts.filterByMinutes(filtPosts.length?aux:allPosts))
+      case 'readyInMinutesRev':
+        setFiltPosts(personalSorts.filterByMinutesRev(filtPosts.length?aux:allPosts))  
       default:
         setFiltPosts([])
         break;
@@ -114,6 +120,13 @@ function Home({
                 <div className='filtbn'>
                   <button name='points' className='filterdownPoints' onClick={e => handleFilter(e)}>.</button>
                   <button name='pointsrev' className='filterupPoints' onClick={e => handleFilter(e)}>.</button>
+                </div>
+              </label>
+
+              <label className='orderlabel'>Order by minutes
+                <div className='filtbn'>
+                  <button name='readyInMinutes' className='filterdownPoints' onClick={e => handleFilter(e)}>.</button>
+                  <button name='readyInMinutesRev' className='filterupPoints' onClick={e => handleFilter(e)}>.</button>
                 </div>
               </label>
 

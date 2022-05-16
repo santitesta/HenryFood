@@ -22,5 +22,11 @@ export const personalSorts = {
     let sorted = posts.filter(p => p.diets.includes(dietName.toLowerCase()))
     if(sorted.length) { return sorted }
     else {return ['empty']}
+  },
+  filterByMinutes: function(posts) {
+    return posts.sort((a,b)=> a.healthScore - b.healthScore)
+  },
+  filterByMinutesRev: function(posts) {
+    return posts.sort((a,b)=> a.healthScore - b.healthScore).reverse()
   }
 };
